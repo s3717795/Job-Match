@@ -8,7 +8,16 @@ class Account
     private $id;
 
     /* The name of the logged in account (or NULL if there is no logged in account) */
+    private $username;
+
+    /* The full name of the logged in account */
     private $name;
+
+    /* The email address of the logged in account */
+    private $email;
+
+    /* The password of the logged in account */
+    private $passwd;
 
     /* TRUE if the user is authenticated, FALSE otherwise */
     private $authenticated;
@@ -21,7 +30,7 @@ class Account
     {
         /* Initialize the $id and $name variables to NULL */
         $this->id = NULL;
-        $this->name = NULL;
+        $this->username = NULL;
         $this->authenticated = FALSE;
     }
 
@@ -87,7 +96,6 @@ class Account
         /* Values array for PDO */
         $values = array(':username' => $username, ':passwd' => $hash, ':fullname' => $name, ':email' => $email);
 
-        /* Execute the query */
         try
         {
             $res = $pdo->prepare($query);
@@ -95,7 +103,6 @@ class Account
         }
         catch (PDOException $e)
         {
-            /* If there is a PDO exception, throw a standard exception */
             throw new Exception('Database query error');
         }
 
@@ -117,7 +124,7 @@ class Account
             $valid = FALSE;
         }
 
-        /* You can add more checks here */
+        /* More checks to be added if need be */
 
         return $valid;
     }
@@ -146,7 +153,7 @@ class Account
             $valid = FALSE;
         }
 
-        /* You can add more checks here */
+        /* More checks to be added if need be */
 
         return $valid;
     }
@@ -164,7 +171,7 @@ class Account
             $valid = FALSE;
         }
 
-        /* You can add more checks here */
+        /* More checks to be added if need be */
 
         return $valid;
     }
@@ -205,7 +212,6 @@ class Account
         }
         catch (PDOException $e)
         {
-            /* If there is a PDO exception, throw a standard exception */
             throw new Exception('Database query error');
         }
 
@@ -287,7 +293,6 @@ class Account
         /* Values array for PDO */
         $values = array(':username' => $username, ':fullname' => $name, ':email' => $email, ':passwd' => $hash, ':enabled' => $intEnabled, ':id' => $id);
 
-        /* Execute the query */
         try
         {
             $res = $pdo->prepare($query);
@@ -295,7 +300,6 @@ class Account
         }
         catch (PDOException $e)
         {
-            /* If there is a PDO exception, throw a standard exception */
             throw new Exception('Database query error');
         }
     }
@@ -324,7 +328,6 @@ class Account
         /* Values array for PDO */
         $values = array(':id' => $id);
 
-        /* Execute the query */
         try
         {
             $res = $pdo->prepare($query);
@@ -342,7 +345,6 @@ class Account
         /* Values array for PDO */
         $values = array(':id' => $id);
 
-        /* Execute the query */
         try
         {
             $res = $pdo->prepare($query);
@@ -350,9 +352,243 @@ class Account
         }
         catch (PDOException $e)
         {
-            /* If there is a PDO exception, throw a standard exception */
             throw new Exception('Database query error');
         }
     }
+
+    /* Login with username and password */
+    public function login(string $username, string $passwd, string $account_type): bool
+    {
+        /* Global $pdo object */
+        global $pdo;
+
+        /* Trim the strings to remove extra spaces */
+        $username = trim($username);
+        $passwd = trim($passwd);
+
+        /* Check if the user name is valid. If not, return FALSE meaning the authentication failed */
+        if (!$this->isNameValid($username))
+        {
+            return FALSE;
+        }
+
+        /* Check if the password is valid. If not, return FALSE meaning the authentication failed */
+        if (!$this->isPasswdValid($passwd))
+        {
+            return FALSE;
+        }
+
+        /* Look for the account in the db. Note: the account must be enabled (account_enabled = 1) */
+        if (strcmp($account_type, 'applicants')) {
+            $query = 'SELECT * FROM login_system.applicants WHERE (username = :username) AND (account_enabled = 1)';
+        } else if (strcmp($account_type, 'employers'))
+        {
+            $query = 'SELECT * FROM login_system.employers WHERE (username = :username) AND (account_enabled = 1)';
+        } else
+        {
+            throw new Exception('Invalid account type');
+        }
+
+        /* Values array for PDO */
+        $values = array(':username' => $username);
+
+        try
+        {
+            $res = $pdo->prepare($query);
+            $res->execute($values);
+        }
+        catch (PDOException $e)
+        {
+            throw new Exception('Database query error');
+        }
+
+        $row = $res->fetch(PDO::FETCH_ASSOC);
+
+        /* If there is a result, we must check if the password matches using password_verify() */
+        if (is_array($row))
+        {
+            if (password_verify($passwd, $row['account_passwd']))
+            {
+                /* Authentication succeeded. Set the class properties (id and name) */
+                $this->id = intval($row['account_id'], 10);
+                $this->username = $username;
+                $this->authenticated = TRUE;
+
+                /* Register the current Sessions on the database */
+                $this->registerLoginSession();
+
+                /* Finally, Return TRUE */
+                return TRUE;
+            }
+        }
+
+        /* If we are here, it means the authentication failed: return FALSE */
+        return FALSE;
+    }
+
+    /* Saves the current Session ID with the account ID */
+    private function registerLoginSession()
+    {
+        /* Global $pdo object */
+        global $pdo;
+
+        /* Check that a Session has been started */
+        if (session_status() == PHP_SESSION_ACTIVE)
+        {
+            /* 	Use a REPLACE statement to:
+                - insert a new row with the session id, if it doesn't exist, or...
+                - update the row having the session id, if it does exist.
+            */
+            $query = 'REPLACE INTO login_system.account_sessions (session_id, account_id, login_time) VALUES (:sid, :accountId, NOW())';
+            $values = array(':sid' => session_id(), ':accountId' => $this->id);
+
+            try
+            {
+                $res = $pdo->prepare($query);
+                $res->execute($values);
+            }
+            catch (PDOException $e)
+            {
+                throw new Exception('Database query error');
+            }
+        }
+    }
+
+    /* Login using Sessions */
+    public function sessionLogin(string $account_type): bool
+    {
+        /* Global $pdo object */
+        global $pdo;
+
+        /* Check that the Session has been started */
+        if (session_status() == PHP_SESSION_ACTIVE)
+        {
+            /*
+                Query template to look for the current session ID on the account_sessions table.
+                The query also make sure the Session is not older than 7 days
+            */
+            if (strcmp($account_type, 'applicants'))
+                $query =
+
+                    'SELECT * FROM login_system.account_sessions, login_system.applicants WHERE (account_sessions.session_id = :sid) ' .
+                    'AND (account_sessions.login_time >= (NOW() - INTERVAL 7 DAY)) AND (account_sessions.account_id = accounts.account_id) ' .
+                    'AND (accounts.account_enabled = 1)';
+            else if (strcmp($account_type, 'employers'))
+                $query =
+
+                    'SELECT * FROM login_system.account_sessions, login_system.employers WHERE (account_sessions.session_id = :sid) ' .
+                    'AND (account_sessions.login_time >= (NOW() - INTERVAL 7 DAY)) AND (account_sessions.account_id = accounts.account_id) ' .
+                    'AND (accounts.account_enabled = 1)';
+            else
+                throw new Exception('Invalid account type');
+
+            /* Values array for PDO */
+            $values = array(':sid' => session_id());
+
+            try
+            {
+                $res = $pdo->prepare($query);
+                $res->execute($values);
+            }
+            catch (PDOException $e)
+            {
+                throw new Exception('Database query error');
+            }
+
+            $row = $res->fetch(PDO::FETCH_ASSOC);
+
+            if (is_array($row))
+            {
+                /* Authentication succeeded. Set the class properties (id and name) and return TRUE*/
+                $this->id = intval($row['account_id'], 10);
+                $this->name = $row['account_name'];
+                $this->authenticated = TRUE;
+
+                return TRUE;
+            }
+        }
+
+        /* If we are here, the authentication failed */
+        return FALSE;
+    }
+
+    /* Logout the current user */
+    public function logout()
+    {
+        /* Global $pdo object */
+        global $pdo;
+
+        /* If there is no logged in user, do nothing */
+        if (is_null($this->id))
+        {
+            return;
+        }
+
+        /* Reset the account-related properties */
+        $this->id = NULL;
+        $this->name = NULL;
+        $this->authenticated = FALSE;
+
+        /* If there is an open Session, remove it from the account_sessions table */
+        if (session_status() == PHP_SESSION_ACTIVE)
+        {
+            /* Delete query */
+            $query = 'DELETE FROM login_system.account_sessions WHERE (session_id = :sid)';
+
+            /* Values array for PDO */
+            $values = array(':sid' => session_id());
+
+            try
+            {
+                $res = $pdo->prepare($query);
+                $res->execute($values);
+            }
+            catch (PDOException $e)
+            {
+                throw new Exception('Database query error');
+            }
+        }
+    }
+
+    /* "Getter" function for the $authenticated variable
+    Returns TRUE if the remote user is authenticated */
+    public function isAuthenticated(): bool
+    {
+        return $this->authenticated;
+    }
+
+    /* Close all account Sessions except for the current one (aka: "logout from other devices") */
+    public function closeOtherSessions()
+    {
+        /* Global $pdo object */
+        global $pdo;
+
+        /* If there is no logged in user, do nothing */
+        if (is_null($this->id))
+        {
+            return;
+        }
+
+        /* Check that a Session has been started */
+        if (session_status() == PHP_SESSION_ACTIVE)
+        {
+            /* Delete all account Sessions with session_id different from the current one */
+            $query = 'DELETE FROM login_system.account_sessions WHERE (session_id != :sid) AND (account_id = :account_id)';
+
+            /* Values array for PDO */
+            $values = array(':sid' => session_id(), ':account_id' => $this->id);
+
+            try
+            {
+                $res = $pdo->prepare($query);
+                $res->execute($values);
+            }
+            catch (PDOException $e)
+            {
+                throw new Exception('Database query error');
+            }
+        }
+    }
+
 }
 ?>
