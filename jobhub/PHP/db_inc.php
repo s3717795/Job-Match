@@ -1,7 +1,7 @@
 <?php
 
 /* Host name of the MySQL server */
-$host = 'localhost'; # Will be changed to an actual external address
+$host = '101.165.200.78';
 
 /* MySQL account username */
 $user = 'admin';
@@ -10,7 +10,7 @@ $user = 'admin';
 $passwd = 'admin';
 
 /* The schema you want to use */
-$schema = 'login_system';
+$schema = 'test1';
 
 /* The PDO object */
 $pdo = NULL;

@@ -65,7 +65,7 @@ class Account
 	}
 	
 	/* Add a new account to the system and return its ID (the account_id column of the accounts table) */
-	public function addAccount(string $name, string $passwd, string $type): int
+	public function addAccount(string $name, string $passwd): int
 	{
 		/* Global $pdo object */
 		global $pdo;
@@ -73,8 +73,7 @@ class Account
 		/* Trim the strings to remove extra spaces */
 		$name = trim($name);
 		$passwd = trim($passwd);
-	    $type = trim($type);
-
+		
 		/* Check if the user name is valid. If not, throw an exception */
 		if (!$this->isNameValid($name))
 		{
@@ -96,13 +95,13 @@ class Account
 		/* Finally, add the new account */
 		
 		/* Insert query template */
-		$query = 'INSERT INTO login_system.accounts (account_name, account_passwd, account_type) VALUES (:name, :passwd, :type)';
+		$query = 'INSERT INTO test1.accounts (account_name, account_passwd) VALUES (:name, :passwd)';
 		
 		/* Password hash */
 		$hash = password_hash($passwd, PASSWORD_DEFAULT);
 		
 		/* Values array for PDO */
-		$values = array(':name' => $name, ':passwd' => $hash, ':type' => $type);
+		$values = array(':name' => $name, ':passwd' => $hash);
 		
 		/* Execute the query */
 		try
@@ -133,7 +132,7 @@ class Account
 		}
 		
 		/* Query template */
-		$query = 'DELETE FROM login_system.accounts WHERE (account_id = :id)';
+		$query = 'DELETE FROM test1.accounts WHERE (account_id = :id)';
 		
 		/* Values array for PDO */
 		$values = array(':id' => $id);
@@ -151,7 +150,7 @@ class Account
 		}
 		
 		/* Delete the Sessions related to the account */
-		$query = 'DELETE FROM login_system.account_sessions WHERE (account_id = :id)';
+		$query = 'DELETE FROM test1.account_sessions WHERE (account_id = :id)';
 		
 		/* Values array for PDO */
 		$values = array(':id' => $id);
@@ -170,7 +169,7 @@ class Account
 	}
 	
 	/* Edit an account (selected by its ID). The name, the password and the status (enabled/disabled) can be changed */
-	public function editAccount(int $id, string $name, string $passwd, string $full_name, string $email, string $phone, bool $enabled)
+	public function editAccount(int $id, string $name, string $passwd, bool $enabled)
 	{
 		/* Global $pdo object */
 		global $pdo;
@@ -178,9 +177,6 @@ class Account
 		/* Trim the strings to remove extra spaces */
 		$name = trim($name);
 		$passwd = trim($passwd);
-		$full_name = trim($full_name);
-		$email = trim($email);
-		$phone = trim($phone);
 		
 		/* Check if the ID is valid */
 		if (!$this->isIdValid($id))
@@ -199,8 +195,6 @@ class Account
 		{
 			throw new Exception('Invalid password');
 		}
-
-		// Implement check for full name and email
 		
 		/* Check if an account having the same name already exists (except for this one). */
 		$idFromName = $this->getIdFromName($name);
@@ -209,18 +203,11 @@ class Account
 		{
 			throw new Exception('User name already used');
 		}
-
+		
 		/* Finally, edit the account */
 		
 		/* Edit query template */
-		$query = 'UPDATE login_system.accounts 
-                    SET account_name = :name, 
-                    account_passwd = :passwd, 
-                    account_fullname = :fullname, 
-                    account_email = :email, 
-                    account_phone = :phone, 
-                    account_enabled = :enabled 
-                    WHERE account_id = :id';
+		$query = 'UPDATE test1.accounts SET account_name = :name, account_passwd = :passwd, account_enabled = :enabled WHERE account_id = :id';
 		
 		/* Password hash */
 		$hash = password_hash($passwd, PASSWORD_DEFAULT);
@@ -229,15 +216,7 @@ class Account
 		$intEnabled = $enabled ? 1 : 0;
 		
 		/* Values array for PDO */
-		$values = array(
-		    ':name' => $name,
-            ':passwd' => $hash,
-            ':fullname' => $full_name,
-            ':email' => $email,
-            ':phone' => $phone,
-            ':enabled' => $intEnabled,
-            ':id' => $id
-        );
+		$values = array(':name' => $name, ':passwd' => $hash, ':enabled' => $intEnabled, ':id' => $id);
 		
 		/* Execute the query */
 		try
@@ -275,7 +254,7 @@ class Account
 		}
 		
 		/* Look for the account in the db. Note: the account must be enabled (account_enabled = 1) */
-		$query = 'SELECT * FROM login_system.accounts WHERE (account_name = :name) AND (account_enabled = 1)';
+		$query = 'SELECT * FROM test1.accounts WHERE (account_name = :name) AND (account_enabled = 1)';
 		
 		/* Values array for PDO */
 		$values = array(':name' => $name);
@@ -387,7 +366,7 @@ class Account
 			*/
 			$query = 
 			
-			'SELECT * FROM login_system.account_sessions, login_system.accounts WHERE (account_sessions.session_id = :sid) ' . 
+			'SELECT * FROM test1.account_sessions, test1.accounts WHERE (account_sessions.session_id = :sid) ' . 
 			'AND (account_sessions.login_time >= (NOW() - INTERVAL 7 DAY)) AND (account_sessions.account_id = accounts.account_id) ' . 
 			'AND (accounts.account_enabled = 1)';
 			
@@ -444,7 +423,7 @@ class Account
 		if (session_status() == PHP_SESSION_ACTIVE)
 		{
 			/* Delete query */
-			$query = 'DELETE FROM login_system.account_sessions WHERE (session_id = :sid)';
+			$query = 'DELETE FROM test1.account_sessions WHERE (session_id = :sid)';
 			
 			/* Values array for PDO */
 			$values = array(':sid' => session_id());
@@ -479,7 +458,7 @@ class Account
 		if (session_status() == PHP_SESSION_ACTIVE)
 		{
 			/* Delete all account Sessions with session_id different from the current one */
-			$query = 'DELETE FROM login_system.account_sessions WHERE (session_id != :sid) AND (account_id = :account_id)';
+			$query = 'DELETE FROM test1.account_sessions WHERE (session_id != :sid) AND (account_id = :account_id)';
 			
 			/* Values array for PDO */
 			$values = array(':sid' => session_id(), ':account_id' => $this->id);
@@ -514,7 +493,7 @@ class Account
 		$id = NULL;
 		
 		/* Search the ID on the database */
-		$query = 'SELECT account_id FROM login_system.accounts WHERE (account_name = :name)';
+		$query = 'SELECT account_id FROM test1.accounts WHERE (account_name = :name)';
 		$values = array(':name' => $name);
 		
 		try
@@ -555,7 +534,7 @@ class Account
 				- insert a new row with the session id, if it doesn't exist, or...
 				- update the row having the session id, if it does exist.
 			*/
-			$query = 'REPLACE INTO login_system.account_sessions (session_id, account_id, login_time) VALUES (:sid, :accountId, NOW())';
+			$query = 'REPLACE INTO test1.account_sessions (session_id, account_id, login_time) VALUES (:sid, :accountId, NOW())';
 			$values = array(':sid' => session_id(), ':accountId' => $this->id);
 			
 			/* Execute the query */
