@@ -1,3 +1,39 @@
+<?php
+
+if (!(isset($_SESSION["no_username"])
+    || isset($_SESSION["no_password"])
+    || isset($_SESSION["incorrect_username_password"])
+    || isset($_SESSION["session_error"])))
+{
+    session_start();
+}
+
+$wrong_password = "";
+
+    if ($_SESSION["no_username"] && $_SESSION["no_password"])
+    {
+        $wrong_password = "Please enter a username and password.";
+    } else if ($_SESSION["no_username"] == true)
+    {
+        $wrong_password = "Please enter a username.";
+    } else if ($_SESSION["no_password"] == true)
+    {
+        $wrong_password = "Please enter a password.";
+    } else if ($_SESSION["incorrect_username_password"])
+    {
+        $wrong_password = "Your username or password is incorrect.";
+    } else if ($_SESSION["session_error"])
+    {
+        $wrong_password = "Unknown session error has occurred, please try again.";
+    }
+
+$_SESSION["no_username"] = null;
+$_SESSION["no_password"] = null;
+$_SESSION["incorrect_username_password"] = null;
+$_SESSION["session_error"] = null;
+
+?>
+
 <!doctype html>
 <html class="no-js" lang="zxx">
 <head>
@@ -42,17 +78,18 @@
 
 <main class="login-body" data-vide-bg="assets/img/login-bg.mp4">
     <!-- Login Admin -->
-    <form class="form-default" action="assets/img/login-bg.mp4" method="POST">
+    <form class="form-default" action="php/logging_in.php" method="POST">
         
         <div class="login-form">
             <!-- logo-login -->
             <div class="logo-login">
-                <a href="index.html"><img src="assets/img/logo/loder.png" alt=""></a>
+                <a href="index.php"><img src="assets/img/logo/loder.png" alt=""></a>
             </div>
             <h2>Login Here</h2>
+            <h1 style="color:red;"><?php echo $wrong_password; ?></h1>
             <div class="form-input">
-                <label for="name">Email</label>
-                <input  type="email" name="email" placeholder="Email">
+                <label for="name">Username</label>
+                <input  type="text" name="username" placeholder="Username">
             </div>
             <div class="form-input">
                 <label for="name">Password</label>
