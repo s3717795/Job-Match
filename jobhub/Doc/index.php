@@ -154,7 +154,7 @@
         </div>
         <!--Hero Area End-->
         <!--? Brand Area Start -->
-        <div class="brand-area">
+<!--        <div class="brand-area">
             <div class="container">
                 <div class="brand-active brand-border pt-50 pb-40">
                     <div class="single-brand">
@@ -183,7 +183,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
         <!-- Brand Area End -->
         <!--? Our Services Start -->
         <section class="our-services  section-padding40">
@@ -435,60 +435,6 @@
             </div>
         </section>
         <!-- job Post End -->
-        <!--? Testimonial Area Start -->
-        <section class="about-area2 testimonial-area fix">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class=" col-lg-6 col-md-9 col-sm-9">
-                        <div class="about-caption">
-                            <!-- Testimonial Start -->
-                            <div class="h1-testimonial-active dot-style">
-                                <!-- Single Testimonial -->
-                                <div class="single-testimonial">
-                                    <div class="testimonial-caption">
-                                        <img src="assets/img/icon/quotes-sign.png" alt="" class="quotes-sign">
-                                        <p>Brook presents your services with flexible, convenient and cdpose layouts. You can select your favorite layouts & elements for cular ts with unlimited ustomization possibilities. Pixel-perfect replica;ition of thei designers ijtls intended csents your se.</p>
-                                    </div>
-                                    <!-- founder -->
-                                    <div class="testimonial-founder d-flex align-items-center">
-                                        <div class="founder-img">
-                                            <img src="assets/img/icon/Homepage_testi.png" alt="">
-                                        </div>
-                                        <div class="founder-text">
-                                            <span>Robart Brown</span>
-                                            <p>Creative designer at Colorlib</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Single Testimonial -->
-                                <div class="single-testimonial">
-                                    <div class="testimonial-caption">
-                                        <img src="assets/img/icon/quotes-sign.png" alt="" class="quotes-sign">
-                                        <p>Brook presents your services with flexible, convenient and cdpose layouts. You can select your favorite layouts & elements for cular ts with unlimited ustomization possibilities. Pixel-perfect replica;ition of thei designers ijtls intended csents your se.</p>
-                                    </div>
-                                    <!-- founder -->
-                                    <div class="testimonial-founder d-flex align-items-center">
-                                        <div class="founder-img">
-                                            <img src="assets/img/icon/Homepage_testi.png" alt="">
-                                        </div>
-                                        <div class="founder-text">
-                                            <span>Robart Brown</span>
-                                            <p>Creative designer at Colorlib</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Testimonial End -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- about-img -->
-            <div class="about-img2 pt-20">
-                <img src="assets/img/gallery/testimonail.png" alt="">
-            </div>
-        </section>
-        <!--? Testimonial Area End -->
         <!--? Want To work 01-->
         <section class="wantToWork-area">
             <div class="container">

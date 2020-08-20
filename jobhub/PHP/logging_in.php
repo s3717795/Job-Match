@@ -32,6 +32,8 @@ if($_POST["username"] == "" && $_POST["password"] == "")
     header("Location: ../login.php");
 }
 
+$_SESSION["password"] = $_POST["password"];
+
 // Login Process
 try {
     $login = $account->login($_POST["username"], $_POST["password"]);
@@ -72,13 +74,12 @@ if ($login)
     echo 'Authentication successful (session login).<br>';
     echo 'Account ID: ' . $account->getId() . '<br>';
     echo 'Account name: ' . $account->getName() . '<br>';
+    $_SESSION["user_id"] = $account->getId();
+    header("Location: ../");
 }
 else
 {
     $_SESSION["session_error"] = true;
     header("Location: ../login.php");
 }
-
-$_SESSION["user_id"] = $account->getId();
-
 ?>

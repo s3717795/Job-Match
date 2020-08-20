@@ -8,8 +8,13 @@ if (!(isset($_SESSION["no_username"])
     session_start();
 }
 
-$wrong_password = "";
+if (isset($_SESSION["user_id"]))
+{
+    header("Location: .");
+}
 
+$wrong_password = "";
+if (isset($_SESSION["no_username"]) || isset($_SESSION["no_password"]) )
     if ($_SESSION["no_username"] && $_SESSION["no_password"])
     {
         $wrong_password = "Please enter a username and password.";

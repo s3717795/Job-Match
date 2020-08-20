@@ -538,8 +538,147 @@ class Account
 		
 		return $id;
 	}
-	
-	
+
+	/* Returns name from account id */
+    public function getNameFromId(int $id): ?string
+    {
+        global $pdo;
+
+        if (!$this->isIdValid($id))
+        {
+            throw new Exception('Invalid account ID');
+        }
+
+        $name = null;
+
+        $query = 'SELECT account_name FROM login_system.accounts WHERE (account_id = :id)';
+        $values = array(':id' => $id);
+
+        try
+        {
+            $res = $pdo->prepare($query);
+            $res->execute($values);
+        }
+        catch (PDOException $e)
+        {
+            throw new Exception('Database query error');
+        }
+
+        $row = $res->fetch(PDO::FETCH_ASSOC);
+
+        if (is_array($row))
+        {
+            $name = $row['account_name'];
+        }
+
+        return $name;
+    }
+
+    /* Returns full name from account id */
+    public function getFullNameFromId(int $id): ?string
+    {
+        global $pdo;
+
+        if (!$this->isIdValid($id))
+        {
+            throw new Exception('Invalid account ID');
+        }
+
+        $fullname = null;
+
+        $query = 'SELECT account_fullname FROM login_system.accounts WHERE (account_id = :id)';
+        $values = array(':id' => $id);
+
+        try
+        {
+            $res = $pdo->prepare($query);
+            $res->execute($values);
+        }
+        catch (PDOException $e)
+        {
+            throw new Exception('Database query error');
+        }
+
+        $row = $res->fetch(PDO::FETCH_ASSOC);
+
+        if (is_array($row))
+        {
+            $fullname = $row['account_fullname'];
+        }
+
+        return $fullname;
+    }
+
+    /* Retrieves email from account id */
+    public function getEmailFromId(int $id): ?string
+    {
+        global $pdo;
+
+        if (!$this->isIdValid($id))
+        {
+            throw new Exception('Invalid account ID');
+        }
+
+        $email = null;
+
+        $query = 'SELECT account_email FROM login_system.accounts WHERE (account_id = :id)';
+        $values = array(':id' => $id);
+
+        try
+        {
+            $res = $pdo->prepare($query);
+            $res->execute($values);
+        }
+        catch (PDOException $e)
+        {
+            throw new Exception('Database query error');
+        }
+
+        $row = $res->fetch(PDO::FETCH_ASSOC);
+
+        if (is_array($row))
+        {
+            $email = $row['account_email'];
+        }
+
+        return $email;
+    }
+
+    /* Retrieves phone from account ID */
+    public function getPhoneFromId(int $id): ?int
+    {
+        global $pdo;
+
+        if (!$this->isIdValid($id))
+        {
+            throw new Exception('Invalid account ID');
+        }
+
+        $phone = null;
+
+        $query = 'SELECT account_phone FROM login_system.accounts WHERE (account_id = :id)';
+        $values = array(':id' => $id);
+
+        try
+        {
+            $res = $pdo->prepare($query);
+            $res->execute($values);
+        }
+        catch (PDOException $e)
+        {
+            throw new Exception('Database query error');
+        }
+
+        $row = $res->fetch(PDO::FETCH_ASSOC);
+
+        if (is_array($row))
+        {
+            $phone = intval($row['account_phone'], 10);
+        }
+
+        return $phone;
+    }
+
 	/* Private class methods */
 	
 	/* Saves the current Session ID with the account ID */
