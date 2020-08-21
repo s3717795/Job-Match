@@ -92,9 +92,7 @@ class Account
 		{
 			throw new Exception('User name not available');
 		}
-
-		/* Check if account type is valid - WIP */
-
+		
 		/* Finally, add the new account */
 		
 		/* Insert query template */

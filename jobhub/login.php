@@ -14,7 +14,10 @@ if (isset($_SESSION["user_id"]))
 }
 
 $wrong_password = "";
-if (isset($_SESSION["no_username"]) || isset($_SESSION["no_password"]) )
+if (isset($_SESSION["no_username"])
+    || isset($_SESSION["no_password"])
+    || isset($_SESSION["incorrect_username_password"])
+    || isset($_SESSION["session_error"]))
     if ($_SESSION["no_username"] && $_SESSION["no_password"])
     {
         $wrong_password = "Please enter a username and password.";
@@ -107,7 +110,7 @@ $_SESSION["session_error"] = null;
             <!-- Forget Password -->
             <a href="#" class="forget">Forget Password</a>
             <!-- Forget Password -->
-            <a href="register.html" class="registration">Registration</a>
+            <a href="register.php" class="registration">Registration</a>
         </div>
     </form>
     <!-- /end login form -->
