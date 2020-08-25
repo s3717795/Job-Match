@@ -50,7 +50,7 @@ if (!($_SESSION["account_created"] == TRUE))
 <!-- Preloader Start-->
 
 
-<main class="login-body" data-vide-bg="assets/img/login-bg.mp4">
+<main class="login-body"j>
     <!-- Login Admin -->
     <form class="form-default" action="./" method="POST">
         <div class="login-form">

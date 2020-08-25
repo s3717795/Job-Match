@@ -332,7 +332,7 @@ class Account
 			$valid = FALSE;
 		}
 
-		if (!preg_match('/^[a-z0-9][a-z0-9_.]*[a-z0-9]$/', $name))
+		if (!preg_match('/^[A-Za-z0-9][A-Za-z0-9_. ]*[A-Za-z0-9]$/', $name))
         {
             $valid = FALSE;
         }
@@ -356,14 +356,14 @@ class Account
 			$valid = FALSE;
 		}
 
-		if (!preg_match('/^[a-z0-9][a-z0-9_.]*[a-z0-9]$/', $passwd))
+        if (!preg_match('/^[A-Za-z0-9][A-Za-z0-9_. ]*[A-Za-z0-9]$/', $passwd))
         {
             $valid = FALSE;
         }
-		
-		/* You can add more checks here */
-		
-		return $valid;
+
+        /* You can add more checks here */
+
+        return $valid;
 	}
 	
 	/* A sanitization check for the account ID */
