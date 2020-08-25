@@ -51,7 +51,7 @@ if (!$account->isEmailValid($_POST["email"]) && !($_POST["email"] == ""))
     $pass = FALSE;
 }
 
-if (!$account->isPhoneValid($_POST["phone"]))
+if (!$account->isPhoneValid($_POST["phone"]) && !($_POST["phone"] == ""))
 {
     $_SESSION["phone_error"] = TRUE;
     $pass = FALSE;

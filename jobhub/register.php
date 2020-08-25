@@ -146,6 +146,7 @@ session_unset();
                     <div class="form-input">
                         <p style="color: red;"><?php echo $username_error; ?></p>
                         <label for="name">Username<span style="color: red;"> *</span></label>
+                        <p style="color: lightgrey;">(8 to 32 characters, numbers and letters allowed)</p>
                         <input  type="text" name="username" placeholder="Username">
                     </div>
                     <div class="form-input">
@@ -161,11 +162,13 @@ session_unset();
                     <div class="form-input">
                         <p style="color: red;"><?php echo $phone_error; ?></p>
                         <label for="name">Phone number</label>
+                        <p style="color: lightgrey;">(10 digits, including area code)</p>
                         <input  type="text" name="phone" placeholder="Phone number">
                     </div>
                     <div class="form-input">
                         <p style="color: red;"><?php echo $password_error; ?></p>
                         <label for="name">Password<span style="color: red;"> *</span></label>
+                        <p style="color: lightgrey;">(8 to 32 characters, numbers and letters allowed)</p>
                         <input type="password" name="password" placeholder="Password">
                     </div>
                     <div class="form-input">
@@ -174,7 +177,7 @@ session_unset();
                         <input type="password" name="password2" placeholder="Password">
                     </div>
                     <div>
-                        <p>Fields marked * are required.</p>
+                        <p style="color: lightblue;">Fields marked * are required.</p>
                     </div>
                     <div class="form-input pt-30">
                         <input type="submit" name="submit" value="Register Account">

@@ -327,10 +327,15 @@ class Account
 		/* Example check: the length must be between 8 and 16 chars */
 		$len = mb_strlen($name);
 		
-		if (($len < 8) || ($len > 16))
+		if (($len < 8) || ($len > 32))
 		{
 			$valid = FALSE;
 		}
+
+		if (!preg_match('/^[a-z0-9][a-z0-9_.]*[a-z0-9]$/', $name))
+        {
+            $valid = FALSE;
+        }
 		
 		/* You can add more checks here */
 		
@@ -346,10 +351,15 @@ class Account
 		/* Example check: the length must be between 8 and 16 chars */
 		$len = mb_strlen($passwd);
 		
-		if (($len < 8) || ($len > 16))
+		if (($len < 8) || ($len > 32))
 		{
 			$valid = FALSE;
 		}
+
+		if (!preg_match('/^[a-z0-9][a-z0-9_.]*[a-z0-9]$/', $passwd))
+        {
+            $valid = FALSE;
+        }
 		
 		/* You can add more checks here */
 		
