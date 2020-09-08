@@ -23,7 +23,14 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/jobhub/Doc" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Online_Job_Portal" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -44,6 +51,8 @@
       <workItem from="1597576014481" duration="1682000" />
       <workItem from="1597658290727" duration="23127000" />
       <workItem from="1597923702704" duration="18367000" />
+      <workItem from="1599541307628" duration="2357000" />
+      <workItem from="1599544193236" duration="2347000" />
     </task>
     <servers />
   </component>
@@ -51,9 +60,14 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="794" y="463" key="NewPhpFileDialog" timestamp="1597990958936">
+    <state x="960" y="325" key="FileChooserDialogImpl" timestamp="1599541718720">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
+    <state x="960" y="325" key="FileChooserDialogImpl/0.0.1920.1080/-1680.257.1680.1050/1920.243.1680.1050@0.0.1920.1080" timestamp="1599541718720" />
+    <state x="794" y="463" key="NewPhpFileDialog" timestamp="1599545931732">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="794" y="463" key="NewPhpFileDialog/0.0.1920.1080/-1680.257.1680.1050/1920.243.1680.1050@0.0.1920.1080" timestamp="1599545931732" />
     <state x="794" y="463" key="NewPhpFileDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1597990958936" />
     <state width="498" height="446" key="SwitcherDM" timestamp="1597743625287">
       <screen x="0" y="0" width="1920" height="1080" />
@@ -63,9 +77,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="-7" y="0" width="974" height="1087" key="dock-window-1/0.0.1920.1080@0.0.1920.1080" timestamp="1597745564353" />
-    <state x="1103" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1598336465526">
+    <state x="1103" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1599545464030">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
+    <state x="1103" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/-1680.257.1680.1050/1920.243.1680.1050@0.0.1920.1080" timestamp="1599545464030" />
     <state x="1103" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1598336465526" />
   </component>
 </project>
