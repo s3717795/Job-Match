@@ -1,3 +1,14 @@
+<?php
+session_start();
+$link = mysqli_connect("localhost", "root", "", "login_system");
+require_once("php/account_class.php");
+require_once("php/db_inc.php");
+
+$row_cnt = mysqli_num_rows(mysqli_query($link,"SELECT jobid FROM jobs"));
+
+?>
+
+
 <!doctype html>
 <html class="no-js" lang="zxx">
 <head>
@@ -58,6 +69,7 @@
                                         <nav>
                                             <ul id="navigation">                                                                                          
                                                 <li><a href="index.php">Home</a></li>
+                                                <li><a href="listing.php">Listings</a></li>
                                                 <li><a href="categori.html">Categories</a></li>
                                                 <li><a href="#">Pages</a>
                                                     <ul class="submenu">
@@ -73,7 +85,7 @@
                                     </div>
                                     <!-- Header-btn -->
                                     <div class="header-right-btn d-none d-lg-block ml-65">
-                                        <a href="contact.html" class="border-btn">Post a Job</a>
+                                        <a href="add_job.php" class="border-btn">Post a Job</a>
                                     </div>
                                 </div>
                             </div> 
@@ -240,13 +252,21 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="count mb-35">
-                                    <span>5432 Listings are available</span>
+                                    <span><?php echo $row_cnt ?> Listings are available</span>
                                 </div>
                             </div>
                         </div>
                         <!--? Popular Directory Start -->
                         <div class="popular-directorya-area fix">
                             <div class="row">
+                                <?php
+
+                                $ret=mysqli_query($link,"SELECT * FROM jobs");
+                                $cnt=1;
+                                while($row=mysqli_fetch_array($ret))
+                                {
+                                ?>
+
                                 <div class="col-lg-6">
                                     <!-- Single -->
                                     <div class="properties properties2 mb-30">
@@ -254,21 +274,20 @@
                                             <div class="properties__img overlay1">
                                                 <a href="#"><img src="assets/img/gallery/properties1.png" alt=""></a>
                                                 <div class="img-text">
-                                                    <span>$$$</span>
-                                                    <span>Closed</span>
+                                                    
                                                 </div>
                                                 <div class="icon">
                                                     <img src="assets/img/gallery/categori_icon1.png" alt=""> 
                                                 </div>
                                             </div>
                                             <div class="properties__caption">
-                                                <h3><a href="#">Urban areas</a></h3>
-                                                <p>Let's uncover the best places to eat, drink</p>
+                                                <h3><a href="job_details.php?jobid=<?php echo $row['jobid'];?>"><?php echo $row['jobname'];?></a></h3>
+                                                <p><?php echo $row['jobshortdesc'];?></p>
                                             </div>
                                             <div class="properties__footer d-flex justify-content-between align-items-center">
                                                 <div class="restaurant-name">
                                                     <img src="assets/img/gallery/restaurant-icon.png" alt="">
-                                                    <h3>Food & Restaurant</h3>
+                                                    <h3>$<?php echo $row['jobsalary'];?></h3>
                                                 </div>
                                                 <div class="heart">
                                                     <img src="assets/img/gallery/heart1.png" alt="">
@@ -277,96 +296,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
-                                    <!-- Single -->
-                                    <div class="properties properties2 mb-30">
-                                        <div class="properties__card">
-                                            <div class="properties__img overlay1">
-                                                <a href="#"><img src="assets/img/gallery/properties2.png" alt=""></a>
-                                                <div class="img-text">
-                                                    <span>$$$</span>
-                                                    <span>Closed</span>
-                                                </div>
-                                                <div class="icon">
-                                                    <img src="assets/img/gallery/categori_icon1.png" alt=""> 
-                                                </div>
-                                            </div>
-                                            <div class="properties__caption">
-                                                <h3><a href="#">Urban areas</a></h3>
-                                                <p>Let's uncover the best places to eat, drink</p>
-                                            </div>
-                                            <div class="properties__footer d-flex justify-content-between align-items-center">
-                                                <div class="restaurant-name">
-                                                    <img src="assets/img/gallery/restaurant-icon.png" alt="">
-                                                    <h3>Food & Restaurant</h3>
-                                                </div>
-                                                <div class="heart">
-                                                    <img src="assets/img/gallery/heart1.png" alt="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <!-- Single -->
-                                    <div class="properties properties2 mb-30">
-                                        <div class="properties__card">
-                                            <div class="properties__img overlay1">
-                                                <a href="#"><img src="assets/img/gallery/properties3.png" alt=""></a>
-                                                <div class="img-text">
-                                                    <span>$$$</span>
-                                                    <span>Closed</span>
-                                                </div>
-                                                <div class="icon">
-                                                    <img src="assets/img/gallery/categori_icon1.png" alt=""> 
-                                                </div>
-                                            </div>
-                                            <div class="properties__caption">
-                                                <h3><a href="#">Urban areas</a></h3>
-                                                <p>Let's uncover the best places to eat, drink</p>
-                                            </div>
-                                            <div class="properties__footer d-flex justify-content-between align-items-center">
-                                                <div class="restaurant-name">
-                                                    <img src="assets/img/gallery/restaurant-icon.png" alt="">
-                                                    <h3>Food & Restaurant</h3>
-                                                </div>
-                                                <div class="heart">
-                                                    <img src="assets/img/gallery/heart1.png" alt="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <!-- Single -->
-                                    <div class="properties properties2 mb-30">
-                                        <div class="properties__card">
-                                            <div class="properties__img overlay1">
-                                                <a href="#"><img src="assets/img/gallery/properties3.png" alt=""></a>
-                                                <div class="img-text">
-                                                    <span>$$$</span>
-                                                    <span>Closed</span>
-                                                </div>
-                                                <div class="icon">
-                                                    <img src="assets/img/gallery/categori_icon1.png" alt=""> 
-                                                </div>
-                                            </div>
-                                            <div class="properties__caption">
-                                                <h3><a href="#">Urban areas</a></h3>
-                                                <p>Let's uncover the best places to eat, drink</p>
-                                            </div>
-                                            <div class="properties__footer d-flex justify-content-between align-items-center">
-                                                <div class="restaurant-name">
-                                                    <img src="assets/img/gallery/restaurant-icon.png" alt="">
-                                                    <h3>Food & Restaurant</h3>
-                                                </div>
-                                                <div class="heart">
-                                                    <img src="assets/img/gallery/heart1.png" alt="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                
+                                <?php $cnt=$cnt+1; }?>
                             </div>
                         </div>
                         <!--? Popular Directory End -->

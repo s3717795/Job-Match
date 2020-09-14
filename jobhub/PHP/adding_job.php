@@ -1,60 +1,34 @@
 <?php
-
+session_start();
 require './db_inc.php';
 require './account_class.php';
-require './job_class.php';
 
-$job = new Job();
-
-if(!isset($_POST))
-{
-    if(isset($_SESSION['currentpage']))
-        header("Location: " . $_SESSION['currentpage']);
-    else
-        header("Location: ../index.php");
+$link = mysqli_connect("localhost", "root", "", "login_system");
+ 
+if($link === false){
+    die("ERROR: Could not connect. " . mysqli_connect_error());
 }
 
-$jobname = $_POST["jobname"];
-$jobshortdesc = $_POST["shortjobdesc"];
-$jobdesc = $_POST["jobdesc"];
-$jobskills = $_POST["jobskills"];
-$jobeducation = $_POST["jobeducation"];
-$jobapplydate = $_POST["jobapplydate"];
-$joblocation = $_POST["joblocation"];
-$jobnature = $_POST["natures"];
-$jobsalary = $_POST["jobsalary"];
+$jobname = mysqli_real_escape_string($link, $_REQUEST['jobname']);
+$jobshortdesc = mysqli_real_escape_string($link, $_REQUEST['jobshortdesc']);
+$jobdesc = mysqli_real_escape_string($link, $_REQUEST['jobdesc']);
+$jobskills = mysqli_real_escape_string($link, $_REQUEST['jobskills']);
+$jobeducation = mysqli_real_escape_string($link, $_REQUEST['jobeducation']);
+$jobapply = mysqli_real_escape_string($link, $_REQUEST['jobapply']);
+$joblocation = mysqli_real_escape_string($link, $_REQUEST['joblocation']);
+$jobnature = mysqli_real_escape_string($link, $_REQUEST['jobnature']);
+$jobsalary = mysqli_real_escape_string($link, $_REQUEST['jobsalary']);
+$ID = mysqli_real_escape_string($link, $_REQUEST['sessionid']);
 
-echo "Job name: ".$jobname."<br>";
-echo "Job short description: ".$jobshortdesc."<br>";
-echo "Job description: ".$jobdesc."<br>";
-echo "Job skills: ".$jobskills."<br>";
-echo "Job education: ".$jobeducation."<br>";
-echo "Job apply date: ".$jobapplydate."<br>";
-echo "Job location: ".$joblocation."<br>";
-echo "Job nature: ".$jobnature."<br>";
-echo "Job salary: ".$jobsalary."<br>";
-
-// Add checks for job details, otherwise...
-
-try
-{
-    $newId = $job->addJob($jobname,
-                        $jobshortdesc,
-                        $jobdesc,
-                        $jobskills,
-                        $jobeducation,
-                        $jobapplydate,
-                        $joblocation,
-                        $jobnature,
-                        $jobsalary);
-}
-catch (Exception $e)
-{
-    echo $e->getMessage();
-    die();
+$sql = "INSERT INTO jobs (jobname, jobshortdesc, jobdesc, jobskills, jobeducation, jobapply, joblocation, jobnature, jobsalary, employerID) VALUES ('$jobname', '$jobshortdesc', '$jobdesc', '$jobskills', '$jobeducation', '$jobapply', '$joblocation', '$jobnature', '$jobsalary', '$ID')";
+if(mysqli_query($link, $sql)){
+    echo "Records added successfully.";
+} else{
+    echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
 }
 
-echo 'Job posting successful.<br>';
-$_SESSION["job_posted"] = TRUE;
-//header("Location: ../job_posted.php");
+mysqli_close($link);
+
+header("Location: ../index.php");
+
 ?>

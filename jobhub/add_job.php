@@ -1,11 +1,10 @@
 <?php
 session_start();
-
-//if(!isset($_SESSION['user_id']))
-//    header($_SESSION['currentpage']);
-
-$_SESSION['currentpage'] = "add_job.php";
+require_once("php/account_class.php");
+require_once("php/db_inc.php");
+$sessionid = $_SESSION["user_id"];
 ?>
+
 <!doctype html>
 <html class="no-js" lang="zxx">
 <head>
@@ -66,6 +65,7 @@ $_SESSION['currentpage'] = "add_job.php";
                                     <nav>
                                         <ul id="navigation">
                                             <li><a href="index.php">Home</a></li>
+                                            <li><a href="listing.php">Listings</a></li>
                                             <li><a href="categori.html">Categories</a></li>
                                             <li><a href="#">Pages</a>
                                                 <ul class="submenu">
@@ -132,31 +132,31 @@ $_SESSION['currentpage'] = "add_job.php";
                         <!-- Single -->
                         <div class="single-top-jobs">
                             <div class="services-cap">
-                                <form action="./PHP/adding_job.php" method="POST" id="addjobform" name="addjobform">
+                                <form id="addjobform" name="addjobform" method="post" action="php/adding_job.php">
                                     <p>Job Name<span style="color: red;"> *</span></p>
                                     <div style="text-align:center;"><input style="margin: auto; width: 550px" type="text" id="jobname" name="jobname" placeholder="Job name"></div><br><br>
                                     <p>Job Location<span style="color: red;"> *</span></p>
                                     <div style="text-align:center;"><input style="margin: auto; width: 550px" type="text" id="joblocation" name="joblocation" placeholder="Job location"></div><br><br>
                                     <p>Job Nature<span style="color: red;"> *</span></p>
                                     <div style="text-align:center;">
-                                        <select name="natures" id="natures" form="addjobform">
-                                            <option value="fulltime">Full time</option>
-                                            <option value="parttime">Part time</option>
-                                            <option value="casual">Casual</option>
+                                        <select name="jobnature" id="jobnature" form="addjobform">
+                                            <option value="Full time">Full time</option>
+                                            <option value="Part time">Part time</option>
+                                            <option value="Casual">Casual</option>
                                         </select>
                                     </div><br><br><br>
                                     <p>Job Salary</p>
                                     <div style="text-align:center;"><input style="margin: auto; width: 550px" type="text" id="jobsalary" name="jobsalary" placeholder="Job salary"></div><br><br>
                                     <p>Job Application Date</p>
-                                    <div><input style="margin: auto;" type="date" id="jobapplydate" name="jobapplydate"></div><br><br>
+                                    <div><input style="margin: auto;" type="date" id="jobapply" name="jobapply"></div><br><br>
                                     <p>Short Job Description<span style="color: red;"> *</span></p>
-                                    <div style="text-align:center;"><textarea id="shortjobdesc" name="shortjobdesc" rows="5" cols="60" form="addjobform" placeholder="Short job description"></textarea></div><br><br>
+                                    <div style="text-align:center;"><textarea id="jobshortdesc" name="jobshortdesc" rows="5" cols="60" form="addjobform" placeholder="Short job description"></textarea></div><br><br>
                                     <p>Job Description</p>
                                     <div style="text-align:center;"><textarea id="jobdesc" name="jobdesc" rows="10" cols="60" form="addjobform" placeholder="Job description"></textarea></div><br><br>
                                     <p>Job Skills</p>
                                     <div style="text-align:center;">
                                         <input style="margin: auto; width: 550px;" type="text" id="jobskills" name="jobskills" placeholder="Job skill"><br><br id="break1">
-<!--                                        <input type="button" id="addTextBox" value="Add Skill" onClick="incrementCount()">-->
+                                        <input type="button" id="addTextBox" value="Add Skill" onClick="incrementCount()">
                                         <!-- <input type="button" id="removeTextBox" value="Remove Skill" onClick="decCount()"> -->
                                         <script language="javascript" type="text/javascript">
                                             var count1 = 0;
@@ -200,7 +200,7 @@ $_SESSION['currentpage'] = "add_job.php";
                                     <p>Job Education</p>
                                     <div style="text-align:center;">
                                         <input style="margin: auto; width: 550px;" type="text" id="jobeducation" name="jobeducation" placeholder="Job education"><br><br id="break2">
-<!--                                        <input type="button" id="addTextBox" value="Add Skill" onClick="incrementCount2()">-->
+                                        <input type="button" id="addTextBox" value="Add Skill" onClick="incrementCount2()">
 <!--                                        <input type="button" id="removeTextBox" value="Remove Skill" onClick="decCount2()">-->
                                         <script language="javascript" type="text/javascript">
                                             var count2 = 0;
@@ -241,8 +241,11 @@ $_SESSION['currentpage'] = "add_job.php";
                                         </script>
                                     </div><br><br>
                                     <p style="color: lightblue;">Fields marked with <span style="color: red;">*</span> are required.</p>
-                                    <input type="submit" name="submit" id="submitbutton" value="Add job" onclick="return validateForm()">
+                                    <input type="hidden" id="sessionid" name="sessionid" value=<?php echo $_SESSION["user_id"]; ?>>
+                                    <input type="submit" name="submit" id="submitbutton" value="Add job"b>
                                     <script language="javascript" type="text/javascript">
+                                        document.getElementById('submitbutton').addEventListener('click', validateForm);
+
                                         function validateForm()
                                         {
                                             var jobname = document.forms["addjobform"]["jobname"].value;
@@ -258,7 +261,6 @@ $_SESSION['currentpage'] = "add_job.php";
                                                 || isEmptyOrSpaces(jobshortdesc))
                                             {
                                                 alert("Please fill out all required fields.");
-                                                return false;
                                             }
                                         }
                                     </script>
