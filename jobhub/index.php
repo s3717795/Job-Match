@@ -62,6 +62,7 @@ $_SESSION["currentpage"] = "index.php";
                                         <nav>
                                             <ul id="navigation">                                                                                          
                                                 <li><a href="index.php">Home</a></li>
+                                                <li><a href="listing.php">Listings</a></li>
                                                 <li><a href="categori.html">Categories</a></li>
                                                 <li><a href="#">Pages</a>
                                                     <ul class="submenu">
@@ -86,7 +87,7 @@ $_SESSION["currentpage"] = "index.php";
                                     </div>
                                     <!-- Header-btn -->
                                     <div class="header-right-btn d-none d-lg-block ml-65">
-                                        <a href="contact.html" class="border-btn">Post a Job</a>
+                                        <a href="add_job.php" class="border-btn">Post a Job</a>
                                     </div>
                                 </div>
                             </div> 

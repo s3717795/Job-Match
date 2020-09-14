@@ -65,6 +65,7 @@ $sessionid = $_SESSION["user_id"];
                                     <nav>
                                         <ul id="navigation">
                                             <li><a href="index.php">Home</a></li>
+                                            <li><a href="listing.php">Listings</a></li>
                                             <li><a href="categori.html">Categories</a></li>
                                             <li><a href="#">Pages</a>
                                                 <ul class="submenu">

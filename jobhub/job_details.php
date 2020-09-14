@@ -3,6 +3,7 @@ session_start();
 require_once("php/job_class.php");
 require_once("php/company_class.php");
 require_once("php/db_inc.php");
+$link = mysqli_connect("localhost", "root", "", "login_system");
 
 //if(!(isset($_SESSION['job_id'])))
 //{
@@ -15,8 +16,8 @@ $_SESSION['currentpage'] = "job_details.php";
 //    header($_SESSION['currentpage']);
 
 //$jobid = $_SESSION["jobid"];
-$job = new Job();
-$company = new Company();
+//$job = new Job();
+//$company = new Company();
 //$jobname = $job.getName();
 //$jobshortdesc = $job.getShortDesc();
 //$jobdesc = $job.getDesc();
@@ -28,7 +29,22 @@ $company = new Company();
 //$jobsalary = $job.getSalary();
 //$jobapply = $job.getApplyDate();
 
-$jobname = $jobshortdesc = $jobdesc = $jobskills = $jobeducation = $jobposted = $joblocation = $jobnature = $jobsalary = $jobapply = "test";
+$jobid = $_REQUEST['jobid'];
+$jobinfo = mysqli_query($link,"SELECT * FROM jobs WHERE jobid = $jobid");
+$row = mysqli_fetch_array($jobinfo);
+
+$jobname = $row['jobname'];
+$jobshortdesc = $row['jobshortdesc'];
+$jobdesc = $row['jobdesc'];
+$jobskills = $row['jobskills'];
+$jobeducation = $row['jobeducation'];
+$jobposted = date("Y-m-d", strtotime($row['jobposted']));
+$joblocation = $row['joblocation'];
+$jobnature = $row['jobnature'];
+$jobsalary = $row['jobsalary'];
+$jobapply = $row['jobapply'];
+
+
 
 ?>
 
@@ -92,6 +108,7 @@ $jobname = $jobshortdesc = $jobdesc = $jobskills = $jobeducation = $jobposted = 
                                         <nav>
                                             <ul id="navigation">                                                                                          
                                                 <li><a href="index.php">Home</a></li>
+                                                <li><a href="listing.php">Listings</a></li>
                                                 <li><a href="categori.html">Categories</a></li>
                                                 <li><a href="#">Pages</a>
                                                     <ul class="submenu">
@@ -116,7 +133,7 @@ $jobname = $jobshortdesc = $jobdesc = $jobskills = $jobeducation = $jobposted = 
                                     </div>
                                     <!-- Header-btn -->
                                     <div class="header-right-btn d-none d-lg-block ml-65">
-                                        <a href="contact.html" class="border-btn">Post a Job</a>
+                                        <a href="add_job.php" class="border-btn">Post a Job</a>
                                     </div>
                                 </div>
                             </div> 
