@@ -2,6 +2,9 @@
 
 require './db_inc.php';
 require './account_class.php';
+require './job_class.php';
+
+$job = new Job();
 
 if(!isset($_POST))
 {
@@ -31,6 +34,27 @@ echo "Job location: ".$joblocation."<br>";
 echo "Job nature: ".$jobnature."<br>";
 echo "Job salary: ".$jobsalary."<br>";
 
+// Add checks for job details, otherwise...
 
+try
+{
+    $newId = $job->addJob($jobname,
+                        $jobshortdesc,
+                        $jobdesc,
+                        $jobskills,
+                        $jobeducation,
+                        $jobapplydate,
+                        $joblocation,
+                        $jobnature,
+                        $jobsalary);
+}
+catch (Exception $e)
+{
+    echo $e->getMessage();
+    die();
+}
 
+echo 'Job posting successful.<br>';
+$_SESSION["job_posted"] = TRUE;
+//header("Location: ../job_posted.php");
 ?>

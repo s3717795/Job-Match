@@ -54,6 +54,7 @@
       <recent name="C:\Users\Thinkpad\PhpstormProjects\Job-Match\jobhub\Doc" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\bymas\PhpstormProjects\Job-Match\jobhub\PHP\test" />
       <recent name="C:\Users\bymas\PhpstormProjects\Job-Match\jobhub\PHP" />
       <recent name="C:\Users\Thinkpad\PhpstormProjects\Job-Match\jobhub\php" />
     </key>
@@ -72,7 +73,7 @@
       <workItem from="1599541307628" duration="2357000" />
       <workItem from="1599544193236" duration="7084000" />
       <workItem from="1600057825530" duration="7126000" />
-      <workItem from="1600070472354" duration="11482000" />
+      <workItem from="1600070472354" duration="14566000" />
     </task>
     <servers />
   </component>
@@ -102,16 +103,16 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="498" height="446" key="SwitcherDM/0.0.1920.1080@0.0.1920.1080" timestamp="1597743625287" />
-    <state x="953" y="0" width="974" height="1087" key="dock-window-1" timestamp="1600070738172">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="1920" y="245" width="974" height="1087" key="dock-window-1" timestamp="1600093191059">
+      <screen x="1920" y="245" width="1680" height="1050" />
     </state>
-    <state x="953" y="0" width="974" height="1087" key="dock-window-1/0.0.1920.1080/-1680.257.1680.1050/1920.245.1680.1050@0.0.1920.1080" timestamp="1600060373091" />
+    <state x="1920" y="245" width="974" height="1087" key="dock-window-1/0.0.1920.1080/-1680.257.1680.1050/1920.245.1680.1050@0.0.1920.1080" timestamp="1600093191059" />
     <state x="953" y="0" width="974" height="1087" key="dock-window-1/0.0.1920.1080@0.0.1920.1080" timestamp="1600070738172" />
-    <state x="1103" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1600089562138">
+    <state x="1103" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1600091679369">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="1103" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/-1680.257.1680.1050/1920.243.1680.1050@0.0.1920.1080" timestamp="1599549271220" />
-    <state x="1103" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/-1680.257.1680.1050/1920.245.1680.1050@0.0.1920.1080" timestamp="1600089562138" />
+    <state x="1103" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/-1680.257.1680.1050/1920.245.1680.1050@0.0.1920.1080" timestamp="1600091679369" />
     <state x="1103" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1598336465526" />
   </component>
   <component name="XDebuggerManager">
