@@ -1,16 +1,16 @@
 <?php
 
 /* Host name of the MySQL server */
-$host = '101.165.200.78';
+$host = '101.165.199.14';
 
 /* MySQL account username */
-$user = 'admin';
+$user = 'outsideadmin';
 
 /* MySQL account password */
-$passwd = 'admin';
+$passwd = 'bLb$?Se%@6@U*5CK';
 
 /* The schema you want to use */
-$schema = 'test1';
+$schema = 'login_system';
 
 /* The PDO object */
 $pdo = NULL;

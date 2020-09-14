@@ -67,7 +67,16 @@
                                                     <li><a href="elements.html">Element</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="login.php">Log in</a></li>
+                                            <li><?php
+                                                $login_text = "Log in";
+                                                $modified_link = "<a href='login.php'>";
+
+                                                if (isset($_SESSION["user_id"]))
+                                                {
+                                                    $login_text = "Profile";
+                                                    $modified_link = "<a href='profile.php'>";
+                                                }
+                                                ?><?php echo $modified_link.$login_text; ?></a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -115,12 +124,12 @@
                         <!-- Single -->
                         <div class="single-top-jobs">
                             <div class="services-cap">
-                                <form action="PHP/adding_job.php" id="addjobform">
-                                    <p>Job Name</p>
+                                <form id="addjobform" name="addjobform">
+                                    <p>Job Name<span style="color: red;"> *</span></p>
                                     <div style="text-align:center;"><input style="margin: auto; width: 550px" type="text" id="jobname" name="jobname" placeholder="Job name"></div><br><br>
-                                    <p>Job Location</p>
+                                    <p>Job Location<span style="color: red;"> *</span></p>
                                     <div style="text-align:center;"><input style="margin: auto; width: 550px" type="text" id="joblocation" name="joblocation" placeholder="Job location"></div><br><br>
-                                    <p>Job Nature</p>
+                                    <p>Job Nature<span style="color: red;"> *</span></p>
                                     <div style="text-align:center;">
                                         <select name="natures" id="natures" form="addjobform">
                                             <option value="fulltime">Full time</option>
@@ -132,9 +141,120 @@
                                     <div style="text-align:center;"><input style="margin: auto; width: 550px" type="text" id="jobsalary" name="jobsalary" placeholder="Job salary"></div><br><br>
                                     <p>Job Application Date</p>
                                     <div><input style="margin: auto;" type="date" id="jobappdate" name="jobappdate"></div><br><br>
+                                    <p>Short Job Description<span style="color: red;"> *</span></p>
+                                    <div style="text-align:center;"><textarea id="shortjobdesc" name="shortjobdesc" rows="5" cols="60" form="addjobform" placeholder="Short job description"></textarea></div><br><br>
                                     <p>Job Description</p>
                                     <div style="text-align:center;"><textarea id="jobdesc" name="jobdesc" rows="10" cols="60" form="addjobform" placeholder="Job description"></textarea></div><br><br>
+                                    <p>Job Skills</p>
+                                    <div style="text-align:center;">
+                                        <input style="margin: auto; width: 550px;" type="text" id="jobskills" name="jobskills" placeholder="Job skill"><br><br id="break1">
+                                        <input type="button" id="addTextBox" value="Add Skill" onClick="incrementCount()">
+                                        <!-- <input type="button" id="removeTextBox" value="Remove Skill" onClick="decCount()"> -->
+                                        <script language="javascript" type="text/javascript">
+                                            var count1 = 0;
+                                            function incrementCount() {
+                                                //document.addjobform.count.value = parseInt(document.frm.count.value) + 1;
+                                                count1++;
+                                                addTextBox();
+                                            }
 
+                                            // function decCount() {
+                                            //     //document.addjobform.count.value = parseInt(document.frm.count.value) - 1;
+                                            //     if(count1>=1)
+                                            //         count1--;
+                                            //     removeTextBox();
+                                            // }
+
+                                            function addTextBox() {
+                                                var form = document.addjobform;
+                                                // form.appendChild(document.createElement('div')).innerHTML
+                                                //     = "<div style=\"text-align:center;\">" +
+                                                //         "<input style=\"margin: auto; width: 550px;\" " +
+                                                //         "type=\"text\" " +
+                                                //         "name=\"jobskills\" " +
+                                                //         "placeholder=\"Job skill\">" +
+                                                //     "</div><br><br>";
+                                                form.appendChild($("#break1").after("<div style=\"text-align:center;\">" +
+                                                    "<input style=\"margin: auto; width: 550px;\"" +
+                                                    "type=\"text\"" +
+                                                    "name=\"jobskills\"" +
+                                                    "placeholder=\"Job skill\"><br><br>"));
+                                            }
+
+                                            // function removeTextBox() {
+                                            //     var form = document.addjobform;
+                                            //     //if (form.lastChild.nodeName.toLowerCase() == '$("#break1")')
+                                            //     if(count1>=1)
+                                            //         form.removeChild(form.lastChild);
+                                            // }
+                                        </script>
+                                    </div><br><br>
+                                    <p>Job Education</p>
+                                    <div style="text-align:center;">
+                                        <input style="margin: auto; width: 550px;" type="text" id="jobeducation" name="jobeducation" placeholder="Job education"><br><br id="break2">
+                                        <input type="button" id="addTextBox" value="Add Skill" onClick="incrementCount2()">
+<!--                                        <input type="button" id="removeTextBox" value="Remove Skill" onClick="decCount2()">-->
+                                        <script language="javascript" type="text/javascript">
+                                            var count2 = 0;
+                                            function incrementCount2() {
+                                                //document.addjobform.count.value = parseInt(document.frm.count.value) + 1;
+                                                count2++;
+                                                addTextBox2();
+                                            }
+
+                                            // function decCount2() {
+                                            //     //document.addjobform.count.value = parseInt(document.frm.count.value) - 1;
+                                            //     if(count2>=1)
+                                            //         count2--;
+                                            //     removeTextBox2();
+                                            // }
+
+                                            function addTextBox2() {
+                                                var form = document.addjobform;
+                                                // form.appendChild(document.createElement('div')).innerHTML
+                                                //     = "<div style=\"text-align:center;\">" +
+                                                //         "<input style=\"margin: auto; width: 550px;\" " +
+                                                //         "type=\"text\" " +
+                                                //         "name=\"jobskills\" " +
+                                                //         "placeholder=\"Job skill\">" +
+                                                //     "</div><br><br>";
+                                                form.appendChild($("#break2").after("<div style=\"text-align:center;\">" +
+                                                    "<input style=\"margin: auto; width: 550px;\"" +
+                                                    "type=\"text\"" +
+                                                    "name=\"jobeducation\"" +
+                                                    "placeholder=\"Job education\"><br><br>"));
+                                            }
+
+                                            // function removeTextBox2() {
+                                            //     var form = document.addjobform;
+                                            //     if (form.lastChild.nodeName.toLowerCase() == 'div2')
+                                            //         form.removeChild(form.lastChild);
+                                            // }
+                                        </script>
+                                    </div><br><br>
+                                    <p style="color: lightblue;">Fields marked with <span style="color: red;">*</span> are required.</p>
+                                    <input type="submit" name="submit" id="submitbutton" value="Add job"b>
+                                    <script language="javascript" type="text/javascript">
+                                        document.getElementById('submitbutton').addEventListener('click', validateForm);
+
+                                        function validateForm()
+                                        {
+                                            var jobname = document.forms["addjobform"]["jobname"].value;
+                                            var joblocation = document.forms["addjobform"]["joblocation"].value;
+                                            var jobnature = document.forms["addjobform"]["natures"].value;
+                                            var jobshortdesc = document.forms["addjobform"]["shortjobdesc"].value;
+
+                                            //alert("Success!");
+
+                                            if(isEmptyOrSpaces(jobname)
+                                                || isEmptyOrSpaces(joblocation)
+                                                || isEmptyOrSpaces(jobnature)
+                                                || isEmptyOrSpaces(jobshortdesc))
+                                            {
+                                                alert("Please fill out all required fields.");
+                                            }
+                                        }
+                                    </script>
                                 </form>
                             </div>
                         </div>
@@ -262,6 +382,8 @@
 </div>
 
 <!-- JS here -->
+
+<script src="./JS/tools.js"></script>
 
 <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
 <!-- Jquery, Popper, Bootstrap -->

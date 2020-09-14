@@ -177,7 +177,7 @@ session_unset();
                         <input type="password" name="password2" placeholder="Password">
                     </div>
                     <div>
-                        <p style="color: lightblue;">Fields marked * are required.</p>
+                        <p style="color: lightblue;">Fields marked with <span style="color: red;">*</span> are required.</p>
                     </div>
                     <div class="form-input pt-30">
                         <input type="submit" name="submit" value="Register Account">

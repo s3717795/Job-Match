@@ -10,8 +10,21 @@
   <component name="ComposerSettings">
     <execution />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
   </component>
   <component name="PhpDebugGeneral" listening_started="true" />
   <component name="ProjectId" id="1gB7DVLMvs9ws9BliEbza0IE2qf" />
@@ -30,6 +43,7 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="JavaScript.Libraries" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -37,6 +51,7 @@
       <recent name="C:\Users\Thinkpad\PhpstormProjects\Job-Match\jobhub\Doc" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\bymas\PhpstormProjects\Job-Match\jobhub\PHP" />
       <recent name="C:\Users\Thinkpad\PhpstormProjects\Job-Match\jobhub\php" />
     </key>
   </component>
@@ -52,7 +67,9 @@
       <workItem from="1597658290727" duration="23127000" />
       <workItem from="1597923702704" duration="18367000" />
       <workItem from="1599541307628" duration="2357000" />
-      <workItem from="1599544193236" duration="2347000" />
+      <workItem from="1599544193236" duration="7084000" />
+      <workItem from="1600057825530" duration="7126000" />
+      <workItem from="1600070472354" duration="3388000" />
     </task>
     <servers />
   </component>
@@ -64,23 +81,34 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="960" y="325" key="FileChooserDialogImpl/0.0.1920.1080/-1680.257.1680.1050/1920.243.1680.1050@0.0.1920.1080" timestamp="1599541718720" />
-    <state x="794" y="463" key="NewPhpFileDialog" timestamp="1599545931732">
+    <state x="700" y="263" key="NewPhpClassDialog" timestamp="1599549967536">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="794" y="463" key="NewPhpFileDialog/0.0.1920.1080/-1680.257.1680.1050/1920.243.1680.1050@0.0.1920.1080" timestamp="1599545931732" />
+    <state x="700" y="263" key="NewPhpClassDialog/0.0.1920.1080/-1680.257.1680.1050/1920.243.1680.1050@0.0.1920.1080" timestamp="1599549967536" />
+    <state x="794" y="463" key="NewPhpFileDialog" timestamp="1600059438127">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="794" y="463" key="NewPhpFileDialog/0.0.1920.1080/-1680.257.1680.1050/1920.243.1680.1050@0.0.1920.1080" timestamp="1599548967428" />
+    <state x="794" y="463" key="NewPhpFileDialog/0.0.1920.1080/-1680.257.1680.1050/1920.245.1680.1050@0.0.1920.1080" timestamp="1600059438127" />
     <state x="794" y="463" key="NewPhpFileDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1597990958936" />
+    <state x="907" y="238" key="SettingsEditor" timestamp="1600070361896">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="907" y="238" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1600070361896" />
     <state width="498" height="446" key="SwitcherDM" timestamp="1597743625287">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="498" height="446" key="SwitcherDM/0.0.1920.1080@0.0.1920.1080" timestamp="1597743625287" />
-    <state x="-7" y="0" width="974" height="1087" key="dock-window-1" timestamp="1597745564353">
+    <state x="953" y="0" width="974" height="1087" key="dock-window-1" timestamp="1600070738172">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="-7" y="0" width="974" height="1087" key="dock-window-1/0.0.1920.1080@0.0.1920.1080" timestamp="1597745564353" />
-    <state x="1103" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1599545464030">
+    <state x="953" y="0" width="974" height="1087" key="dock-window-1/0.0.1920.1080/-1680.257.1680.1050/1920.245.1680.1050@0.0.1920.1080" timestamp="1600060373091" />
+    <state x="953" y="0" width="974" height="1087" key="dock-window-1/0.0.1920.1080@0.0.1920.1080" timestamp="1600070738172" />
+    <state x="1103" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1600066859556">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="1103" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/-1680.257.1680.1050/1920.243.1680.1050@0.0.1920.1080" timestamp="1599545464030" />
+    <state x="1103" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/-1680.257.1680.1050/1920.243.1680.1050@0.0.1920.1080" timestamp="1599549271220" />
+    <state x="1103" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/-1680.257.1680.1050/1920.245.1680.1050@0.0.1920.1080" timestamp="1600066859556" />
     <state x="1103" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1598336465526" />
   </component>
 </project>
