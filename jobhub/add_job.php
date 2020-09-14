@@ -147,7 +147,7 @@ $sessionid = $_SESSION["user_id"];
                                     <p>Job Salary</p>
                                     <div style="text-align:center;"><input style="margin: auto; width: 550px" type="text" id="jobsalary" name="jobsalary" placeholder="Job salary"></div><br><br>
                                     <p>Job Application Date</p>
-                                    <div><input style="margin: auto;" type="date" id="jobposted" name="jobposted"></div><br><br>
+                                    <div><input style="margin: auto;" type="date" id="jobapply" name="jobapply"></div><br><br>
                                     <p>Short Job Description<span style="color: red;"> *</span></p>
                                     <div style="text-align:center;"><textarea id="jobshortdesc" name="jobshortdesc" rows="5" cols="60" form="addjobform" placeholder="Short job description"></textarea></div><br><br>
                                     <p>Job Description</p>
