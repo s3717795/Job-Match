@@ -113,6 +113,7 @@ $_SESSION['current_page'] = "login.php";
             <a href="#" class="forget">Forget Password</a>
             <!-- Forget Password -->
             <a href="register.php" class="registration">Registration</a>
+            <a href="php/admin/admin_login.php" class="registration">Admin Login</a>
         </div>
     </form>
     <!-- /end login form -->

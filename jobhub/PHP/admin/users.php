@@ -1,11 +1,10 @@
 <?php
 session_start();
 
-if ($_SESSION['email'] == true) {
-  
-}else {
-  header('location: admin_login.php');
-}
+
+require_once("../db_inc.php");
+
+
 
 ?>
 
@@ -32,20 +31,22 @@ if ($_SESSION['email'] == true) {
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+
     <!-- datatable css-->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
 
     <!-- Custom styles for this template -->
-    <link href="css/dashboard.css" rel="stylesheet">
+    <link href="../../assets/css/dashboard.css" rel="stylesheet">
 </head>
 
 <body>
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Company name</a>
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Admin panel</a>
         <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
-                <a class="nav-link" href="logout.php">Sign out</a>
+                <a class="nav-link" href="../logging_out.php">Sign out</a>
             </li>
         </ul>
     </nav>
@@ -61,71 +62,28 @@ if ($_SESSION['email'] == true) {
                                 Dashboard <span class="sr-only">(current)</span>
                             </a>
                         </li>
+                    
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="file"></span>
-                                Orders
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="admin_dashboard.php">
                                 <span data-feather="shopping-cart"></span>
-                                Products
+                                Employers
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="users.php">
                                 <span data-feather="users"></span>
-                                Users
+                                Job Seekers
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">
                                 <span data-feather="bar-chart-2"></span>
-                                Reports
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="layers"></span>
-                                Integrations
+                                Reports (in progress)
                             </a>
                         </li>
                     </ul>
 
-                    <h6
-                        class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                        <span>Saved reports</span>
-                        <a class="d-flex align-items-center text-muted" href="#">
-                            <span data-feather="plus-circle"></span>
-                        </a>
-                    </h6>
-                    <ul class="nav flex-column mb-2">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="file-text"></span>
-                                Current month
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="file-text"></span>
-                                Last quarter
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="file-text"></span>
-                                Social engagement
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="file-text"></span>
-                                Year-end sale
-                            </a>
-                        </li>
-                    </ul>
+                    
                 </div>
             </nav>
 
@@ -133,13 +91,13 @@ if ($_SESSION['email'] == true) {
             <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="admin_dashboard.php">Dashboard</a></li>
-                            <li class="breadcrumb-item"><a href="#">Users</a></li>
+                            <li class="breadcrumb-item"><a href="#">Job Seekers</a></li>
 
                         </ol>
                     </nav>
                 <div
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                    <h1 class= "h2">Users</h1>
+                    <h1 class= "h2">Job Seekers</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group mr-2">
                             <button class="btn btn-sm btn-outline-secondary">Share</button>
@@ -156,28 +114,55 @@ if ($_SESSION['email'] == true) {
                 <table id="example" class="display" style="width:100%">
         <thead>
             <tr>
+            <th>ID</th>
+            <th>Username</th>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Username</th>
-
+                <th>Phone Number</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
-            
+        <?php 
+        
+        $query = mysqli_query($conn, "SELECT * from accounts 
+                                    where account_type = 'applicants'");     
+        
+if (!$query) {
+    printf("Error: %s\n", mysqli_error($conn));
+    exit();
+}
+
+        while($row = mysqli_fetch_array($query)) {
+
+        ?>
             <tr>
-                <td>Donna Snider</td>
-                <td>Customer Support</td>
-                <td>New York</td>
-                <td>27</td>
-                <td>2011/01/25</td>
-                <td>$112,000</td>
+                <td><?php echo $row['account_id']; ?></td>
+                <td><?php echo $row['account_name']; ?></td>
+                <td><?php echo $row['account_fullname']; ?></td>
+                <td><?php echo $row['account_email']; ?></td>
+                <td><?php echo $row['account_phone']; ?></td>
+                <td>
+                    <div class="row">
+                        <div class = "btn.-group">
+                           <a href="user_delete.php?del=<?php echo $row['account_id']; ?>" class ="btn btn-danger"><span class="glyphicon glyphicon-trash">
+
+                           </span></a>
+                        </div>
+
+                    </div>
+                </td>
             </tr>
+        <?php } ?>
         </tbody>
         <tfoot>
             <tr>
-            <th>Name</th>
+            <th>ID</th>
+            <th>Username</th>
+                <th>Name</th>
                 <th>Email</th>
-                <th>Username</th>
+                <th>Phone Number</th>
+                <th>Action</th>
             </tr>
         </tfoot>
     </table>
