@@ -16,13 +16,14 @@ if(!(isset($_SESSION['user_id'])))
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Job board | Template</title>
+    <title>Profile</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
 
     <!-- CSS here -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
     <link rel="stylesheet" href="assets/css/slicknav.css">
@@ -112,6 +113,9 @@ if(!(isset($_SESSION['user_id'])))
                             <li><p><?php echo "Full name: ".$Account->getFullNameFromId($_SESSION["user_id"]); ?></p></li><br>
                             <li><p><?php echo "Email: ".$Account->getEmailFromId($_SESSION["user_id"]); ?></p></li><br>
                             <li><p><?php echo "Phone: ".$Account->getPhoneFromId($_SESSION["user_id"]) ;?></p></li><br>
+                            <a href="php/profile_edit.php" class="btn btn-success"><span class="glyphicon glyphicon-pencil">
+
+                            </span></a>
                         </ul>
                     </div>
                 </div>
@@ -190,3 +194,4 @@ if(!(isset($_SESSION['user_id'])))
 
 </body>
 </html>
+
