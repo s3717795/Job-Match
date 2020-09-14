@@ -3,7 +3,7 @@ session_start();
 
 if (!($_SESSION["account_created"] == TRUE))
 {
-    header("Location: ./");
+    header("Location: ".$_SESSION['currentpage']);
 }
 
 ?>

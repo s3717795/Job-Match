@@ -83,6 +83,7 @@ if (isset($_SESSION["password2_error1"]))
 }
 
 session_unset();
+$_SESSION['currentpage'] = "register.php";
 ?>
 <!doctype html>
 <html class="no-js" lang="zxx">

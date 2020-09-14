@@ -34,6 +34,14 @@ if($_POST["username"] == "" && $_POST["password"] == "")
 
 $_SESSION["password"] = $_POST["password"];
 
+if (!isset($_POST["username"]) || !isset($_POST["password"]))
+{
+    if(isset($_SESSION['currentpage']))
+        header("Location: " . $_SESSION['currentpage']);
+    else
+        header("Location: ./index.php");
+}
+
 // Login Process
 try {
     $login = $account->login($_POST["username"], $_POST["password"]);

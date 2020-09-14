@@ -5,6 +5,14 @@ require_once("db_inc.php");
 $account = new Account();
 $pass = TRUE;
 
+if(!(isset($_POST)))
+{
+    if (isset($_SESSION['currentpage']))
+        header("Location: " . $_SESSION['currentpage']);
+    else
+        header("Location: ./index.php");
+}
+
 if ($_POST["username"] == "")
 {
     $_SESSION["username_error2"] = TRUE;

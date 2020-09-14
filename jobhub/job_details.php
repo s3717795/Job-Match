@@ -1,8 +1,18 @@
 <?php
-
+session_start();
 require_once("php/job_class.php");
 require_once("php/company_class.php");
 require_once("php/db_inc.php");
+
+//if(!(isset($_SESSION['job_id'])))
+//{
+//    header("Location: ".$_SESSION['currentpage']);
+//}
+
+$_SESSION['currentpage'] = "job_details.php";
+
+//if(isset($_SESSION['job_id']))
+//    header($_SESSION['currentpage']);
 
 //$jobid = $_SESSION["jobid"];
 $job = new Job();

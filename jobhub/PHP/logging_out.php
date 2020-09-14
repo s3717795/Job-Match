@@ -6,7 +6,10 @@ $Account = new Account();
 
 if (!isset($_SESSION["user_id"]))
 {
-    header("Location: ../");
+    if(isset($_SESSION['currentpage']))
+        header("Location: " . $_SESSION['currentpage']);
+    else
+        header("Location: ./index.php");
 }
 
 $login = $Account->login($Account->getNameFromId($_SESSION["user_id"]), $_SESSION["password"]);

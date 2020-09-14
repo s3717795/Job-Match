@@ -4,6 +4,12 @@ require_once("php/account_class.php");
 require_once("php/db_inc.php");
 
 $Account = new Account();
+
+if(!(isset($_SESSION['user_id'])))
+{
+    header($_SESSION['currentpage']);
+}
+
 ?>
 <!doctype html>
 <html class="no-js" lang="zxx">
@@ -34,16 +40,7 @@ $Account = new Account();
 </head>
 <body>
 <!-- ? Preloader Start -->
-<div id="preloader-active">
-    <div class="preloader d-flex align-items-center justify-content-center">
-        <div class="preloader-inner position-relative">
-            <div class="preloader-circle"></div>
-            <div class="preloader-img pere-text">
-                <img src="assets/img/logo/loder.png" alt="">
-            </div>
-        </div>
-    </div>
-</div>
+
 <!-- Preloader Start -->
 <!-- Header Start -->
 <div class="header-area header-transparent">

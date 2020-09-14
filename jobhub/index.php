@@ -1,5 +1,6 @@
 <?php
 session_start();
+$_SESSION["currentpage"] = "index.php";
 ?>
 <!doctype html>
 <html class="no-js" lang="zxx">
