@@ -29,6 +29,7 @@ if(mysqli_query($conn, $sql)){
 
 mysqli_close($conn);
 
-header("Location: ../index.php");
+echo "<script language='javascript'>alert('Job posted successfully!');</script>";
+header("Location: ../");
 
 ?>

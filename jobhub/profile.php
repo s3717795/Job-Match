@@ -7,9 +7,13 @@ $Account = new Account();
 
 if(!(isset($_SESSION['user_id'])))
 {
-    header($_SESSION['currentpage']);
+    if(isset($_SESSION['currentpage']))
+        header("Location: ".$_SESSION['currentpage']);
+    else
+        header("Location: ./");
 }
 
+$_SESSION['currentpage'] = "profile.php";
 ?>
 <!doctype html>
 <html class="no-js" lang="zxx">

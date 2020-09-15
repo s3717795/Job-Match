@@ -7,7 +7,10 @@ $Account = new Account();
 
 if(!(isset($_SESSION['user_id'])))
 {
-    header($_SESSION['currentpage']);
+    if(isset($_SESSION['currentpage']))
+        header("Location: ".$_SESSION['currentpage']);
+    else
+        header("Location: ../");
 }
 
 

@@ -10,7 +10,7 @@ if(!(isset($_POST)))
     if (isset($_SESSION['currentpage']))
         header("Location: " . $_SESSION['currentpage']);
     else
-        header("Location: ./index.php");
+        header("Location: ../");
 }
 
 if ($_POST["username"] == "")

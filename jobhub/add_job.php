@@ -2,7 +2,14 @@
 session_start();
 require_once("php/account_class.php");
 require_once("php/db_inc.php");
-$sessionid = $_SESSION["user_id"];
+
+if(isset($_SESSION['user_id']))
+    $sessionid = $_SESSION["user_id"];
+else if(isset($_SESSION['currentpage']))
+    header("Location: ".$_SESSION['currentpage']);
+else
+    header("Location: ./");
+$_SESSION['currentpage'] = "add_job.php";
 ?>
 
 <!doctype html>

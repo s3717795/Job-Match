@@ -9,6 +9,8 @@ if(!(isset($_SESSION['user_id'])))
 {
     header($_SESSION['currentpage']);
 }
+
+$link = $conn = mysqli_connect("localhost", "root", "", "login_system");
 $row_cnt = mysqli_num_rows(mysqli_query($conn,"SELECT jobid FROM jobs"));
 
 ?>

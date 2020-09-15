@@ -41,7 +41,6 @@ $_SESSION["incorrect_username_password"] = null;
 $_SESSION["session_error"] = null;
 
 $_SESSION['current_page'] = "login.php";
-
 ?>
 
 <!doctype html>

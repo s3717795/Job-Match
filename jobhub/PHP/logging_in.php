@@ -39,7 +39,7 @@ if (!isset($_POST["username"]) || !isset($_POST["password"]))
     if(isset($_SESSION['currentpage']))
         header("Location: " . $_SESSION['currentpage']);
     else
-        header("Location: ./index.php");
+        header("Location: ../");
 }
 
 // Login Process

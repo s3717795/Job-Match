@@ -9,7 +9,7 @@ if (!isset($_SESSION["user_id"]))
     if(isset($_SESSION['currentpage']))
         header("Location: " . $_SESSION['currentpage']);
     else
-        header("Location: ./index.php");
+        header("Location: ../");
 }
 
 $login = $Account->login($Account->getNameFromId($_SESSION["user_id"]), $_SESSION["password"]);
