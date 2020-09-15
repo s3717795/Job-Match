@@ -1,24 +1,24 @@
 <?php
 
 /* Host name of the MySQL server */
-$host = 'localhost';
+$host = getenv('CLOUDSQL_DSN');
 
 /* MySQL account username */
-$user = 'root';
+$user = getenv('CLOUDSQL_USER');
 
 /* MySQL account password */
-$passwd = '';
+$passwd = getenv('CLOUDSQL_PASSWORD');
 
 /* The schema you want to use */
-$schema = 'login_system';
+$schema = getenv('CLOUDSQL_DB');
 
 /* The PDO object */
 $pdo = NULL;
 
-$conn = mysqli_connect($host, $user, $passwd, $schema);
+$conn = mysqli_connect(null, $user, $passwd, $schema, null, $host);
 
 /* Connection string, or "data source name" */
-$dsn = 'mysql:host=' . $host . ';dbname=' . $schema;
+$dsn = getenv('CLOUDSQL_DSN');
 
 /* Connection inside a try/catch block */
 try

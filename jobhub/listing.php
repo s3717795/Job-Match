@@ -1,10 +1,15 @@
 <?php
 session_start();
-$link = mysqli_connect("localhost", "root", "", "login_system");
 require_once("php/account_class.php");
 require_once("php/db_inc.php");
 
-$row_cnt = mysqli_num_rows(mysqli_query($link,"SELECT jobid FROM jobs"));
+$Account = new Account();
+
+if(!(isset($_SESSION['user_id'])))
+{
+    header($_SESSION['currentpage']);
+}
+$row_cnt = mysqli_num_rows(mysqli_query($conn,"SELECT jobid FROM jobs"));
 
 ?>
 
