@@ -39,7 +39,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Online_Job_Portal" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/jobhub" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -51,6 +51,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\bymas\PhpstormProjects\Job-Match\jobhub" />
       <recent name="C:\Users\Thinkpad\PhpstormProjects\Job-Match\jobhub\Doc" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -108,11 +109,11 @@
     </state>
     <state x="1920" y="245" width="974" height="1087" key="dock-window-1/0.0.1920.1080/-1680.257.1680.1050/1920.245.1680.1050@0.0.1920.1080" timestamp="1600093191059" />
     <state x="953" y="0" width="974" height="1087" key="dock-window-1/0.0.1920.1080@0.0.1920.1080" timestamp="1600070738172" />
-    <state x="1103" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1600091679369">
+    <state x="1103" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1600133566706">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="1103" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/-1680.257.1680.1050/1920.243.1680.1050@0.0.1920.1080" timestamp="1599549271220" />
-    <state x="1103" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/-1680.257.1680.1050/1920.245.1680.1050@0.0.1920.1080" timestamp="1600091679369" />
+    <state x="1103" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/-1680.257.1680.1050/1920.245.1680.1050@0.0.1920.1080" timestamp="1600133566706" />
     <state x="1103" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1598336465526" />
   </component>
   <component name="XDebuggerManager">

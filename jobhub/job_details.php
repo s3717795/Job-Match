@@ -3,7 +3,7 @@ session_start();
 require_once("php/job_class.php");
 require_once("php/company_class.php");
 require_once("php/db_inc.php");
-$link = mysqli_connect("localhost", "root", "", "login_system");
+$link = mysqli_connect("localhost", "outsideadmin", "bLb$?Se%@6@U*5CK", "login_system");
 
 //if(!(isset($_SESSION['job_id'])))
 //{

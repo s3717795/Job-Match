@@ -1,12 +1,12 @@
 <?php
 session_start();
 
-if (!($_SESSION["account_created"] == TRUE))
+if (!($_SESSION["job_created"] == TRUE))
 {
     header("Location: ".$_SESSION['currentpage']);
 }
 
-$_SESSION['account_created'] = FALSE;
+$_SESSION['job_created'] = FALSE;
 ?>
 
 <!doctype html>
@@ -55,7 +55,7 @@ $_SESSION['account_created'] = FALSE;
     <!-- Login Admin -->
     <form class="form-default" action="./" method="POST">
         <div class="login-form">
-            <h1>Your account has been registered.</h1>
+            <h1>You have added a job.</h1>
             <p>Click <a href="./">here</a> to return</p>
         </div>
     </form>

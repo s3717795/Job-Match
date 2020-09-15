@@ -10,8 +10,8 @@ if(!(isset($_SESSION['user_id'])))
     header($_SESSION['currentpage']);
 }
 
-$link = $conn = mysqli_connect("localhost", "root", "", "login_system");
-$row_cnt = mysqli_num_rows(mysqli_query($conn,"SELECT jobid FROM jobs"));
+$link = $conn = mysqli_connect("localhost", "outsideadmin", "bLb$?Se%@6@U*5CK", "login_system");
+$row_cnt = mysqli_num_rows(mysqli_query($conn,"SELECT job_id FROM jobs"));
 
 ?>
 
@@ -288,13 +288,13 @@ $row_cnt = mysqli_num_rows(mysqli_query($conn,"SELECT jobid FROM jobs"));
                                                 </div>
                                             </div>
                                             <div class="properties__caption">
-                                                <h3><a href="job_details.php?jobid=<?php echo $row['jobid'];?>"><?php echo $row['jobname'];?></a></h3>
-                                                <p><?php echo $row['jobshortdesc'];?></p>
+                                                <h3><a href="job_details.php?jobid=<?php echo $row['job_id'];?>"><?php echo $row['job_name'];?></a></h3>
+                                                <p><?php echo $row['job_short_desc'];?></p>
                                             </div>
                                             <div class="properties__footer d-flex justify-content-between align-items-center">
                                                 <div class="restaurant-name">
                                                     <img src="assets/img/gallery/restaurant-icon.png" alt="">
-                                                    <h3>$<?php echo $row['jobsalary'];?></h3>
+                                                    <h3>$<?php echo $row['job_salary'];?></h3>
                                                 </div>
                                                 <div class="heart">
                                                     <img src="assets/img/gallery/heart1.png" alt="">

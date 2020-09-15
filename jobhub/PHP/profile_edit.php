@@ -4,6 +4,7 @@ require_once("account_class.php");
 require_once("db_inc.php");
 
 $Account = new Account();
+$conn = mysqli_connect("localhost", "outsideadmin", "bLb$?Se%@6@U*5CK", "login_system");
 
 if(!(isset($_SESSION['user_id'])))
 {
@@ -184,7 +185,7 @@ if(!(isset($_SESSION['user_id'])))
 
                                     <hr>
                                     <label for="username"><b>Username</b></label>
-                                    <input type="text" placeholder="Enter Password" name="username" id="username" value="<?php echo $Account->getNameFromId($_SESSION["user_id"]); ?>" >
+                                    <input type="text" placeholder="Enter Username" name="username" id="username" value="<?php echo $Account->getNameFromId($_SESSION["user_id"]); ?>" >
 
                                     <label for="name"><b>Name</b></label>
                                     <input type="text" placeholder="Enter Password" name="name" id="name" value="<?php echo $Account->getFullNameFromId($_SESSION["user_id"]); ?>">
@@ -193,7 +194,7 @@ if(!(isset($_SESSION['user_id'])))
                                     <input type="text" placeholder="Enter Email" name="email" id="email" value="<?php echo $Account->getEmailFromId($_SESSION["user_id"]); ?>">
 
                                     <label for="phone"><b>Phone Number</b></label>
-                                    <input type="text" placeholder="Enter Password" name="phone" id="phone" value="<?php echo $Account->getPhoneFromId($_SESSION["user_id"]); ?>">
+                                    <input type="text" placeholder="Enter Phone Number" name="phone" id="phone" value="<?php echo $Account->getPhoneFromId($_SESSION["user_id"]); ?>">
 
                                     <hr>
                                     <button type="submit" name="submit" class="registerbtn">Update</button>
