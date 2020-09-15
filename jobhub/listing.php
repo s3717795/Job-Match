@@ -77,6 +77,18 @@ $row_cnt = mysqli_num_rows(mysqli_query($conn,"SELECT job_id FROM jobs"));
                                             <ul id="navigation">                                                                                          
                                                 <li><a href="index.php">Home</a></li>
                                                 <li><a href="listing.php">Listings</a></li>
+                                                <?php
+                                                $add_job_text = "Add job";
+                                                $modified_link2 = "<a href='add_job.php'>";
+
+                                                if (isset($_SESSION["user_id"]))
+                                                {
+                                                    $add_job_text = "Profile";
+                                                    $modified_link2 = "<a href='profile.php'>";
+                                                }
+
+                                                echo "<li>".$modified_link2.$add_job_text."</a></li>"
+                                                ?>
                                                 <li><a href="categori.html">Categories</a></li>
                                                 <li><a href="#">Pages</a>
                                                     <ul class="submenu">
@@ -86,7 +98,16 @@ $row_cnt = mysqli_num_rows(mysqli_query($conn,"SELECT job_id FROM jobs"));
                                                         <li><a href="elements.html">Element</a></li>
                                                     </ul>
                                                 </li>
-                                                <li><a href="login.php">Log in</a></li>
+                                                <li><?php
+                                                    $login_text = "Log in";
+                                                    $modified_link = "<a href='login.php'>";
+
+                                                    if (isset($_SESSION["user_id"]))
+                                                    {
+                                                        $login_text = "Profile";
+                                                        $modified_link = "<a href='profile.php'>";
+                                                    }
+                                                    ?><?php echo $modified_link.$login_text; ?></a></li>
                                             </ul>
                                         </nav>
                                     </div>
