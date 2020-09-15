@@ -110,16 +110,15 @@ $jobapply = $row['jobapply'];
                                                 <li><a href="index.php">Home</a></li>
                                                 <li><a href="listing.php">Listings</a></li>
                                                 <?php
-                                                $add_job_text = "Add job";
-                                                $modified_link2 = "<a href='add_job.php'>";
+                                                $add_job_text = "";
+                                                $modified_link2 = "";
 
                                                 if (isset($_SESSION["user_id"]))
                                                 {
-                                                    $add_job_text = "Profile";
-                                                    $modified_link2 = "<a href='profile.php'>";
+                                                    $add_job_text = "Add job";
+                                                    $modified_link2 = "<a href='add_job.php'>";
+                                                    echo "<li>".$modified_link2.$add_job_text."</a></li>";
                                                 }
-
-                                                echo "<li>".$modified_link2.$add_job_text."</a></li>"
                                                 ?>
                                                 <li><a href="categori.html">Categories</a></li>
                                                 <li><a href="#">Pages</a>
