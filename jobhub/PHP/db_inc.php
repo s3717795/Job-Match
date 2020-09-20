@@ -15,6 +15,8 @@ $schema = 'login_system';
 /* The PDO object */
 $pdo = NULL;
 
+$conn = mysqli_connect($host, $user, $passwd, $schema);
+
 /* Connection string, or "data source name" */
 $dsn = 'mysql:host=' . $host . ';dbname=' . $schema;
 

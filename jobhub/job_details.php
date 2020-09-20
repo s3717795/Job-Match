@@ -3,7 +3,6 @@ session_start();
 require_once("php/job_class.php");
 require_once("php/company_class.php");
 require_once("php/db_inc.php");
-$link = mysqli_connect("localhost", "outsideadmin", "bLb$?Se%@6@U*5CK", "login_system");
 
 //if(!(isset($_SESSION['job_id'])))
 //{
@@ -30,7 +29,7 @@ $_SESSION['currentpage'] = "job_details.php";
 //$jobapply = $job.getApplyDate();
 
 $jobid = $_REQUEST['jobid'];
-$jobinfo = mysqli_query($link,"SELECT * FROM jobs WHERE jobid = $jobid");
+$jobinfo = mysqli_query($conn,"SELECT * FROM jobs WHERE jobid = $jobid");
 $row = mysqli_fetch_array($jobinfo);
 
 $jobname = $row['jobname'];

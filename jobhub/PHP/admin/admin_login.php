@@ -31,7 +31,7 @@ session_start();
 </head>
 
 <body class="text-center">
-    <form class="form-signin" id="admin_login" method="POST" action="admin_dashboard.php" name="admin_login">
+    <form class="form-signin" id="admin_login" method="POST" action="admin_login.php" name="admin_login">
         
         <h1 class="h3 mb-3 font-weight-normal">Admin Login</h1>
         
@@ -41,7 +41,7 @@ session_start();
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="pass" name = "pass" class="form-control" placeholder="Password" required>
         
-        <input class="btn btn-lg btn-primary btn-block" type="submit" onclick="window.location.href = 'admin_dashboard.php';" value="Log In" id="submit" name="submit" placeholder="Sign in">
+        <input class="btn btn-lg btn-primary btn-block" type="submit" value="Log In" id="submit" name="submit" placeholder="Sign in">
         <p class="mt-5 mb-3 text-muted">&copy; 2019-2020</p>
     </form>
 </body>
@@ -49,5 +49,25 @@ session_start();
 </html>
 
 <?php
+include('../db_inc.php');
 
+if (isset($_POST['submit'])) {
+$email= $_POST['email'];
+$pass = $_POST['pass'];
+
+$query = mysqli_query($conn, "SELECT * from accounts where account_email='$email' and account_passwd = '$pass' and account_type= 'admin'");
+
+
+if ($query) {
+
+if (mysqli_num_rows($query) > 0) {
+
+    $_SESSION['email']= $email;
+    header('location: admin_dashboard.php');
+
+}else {
+    echo "<script>alert('Email or password incorrect, please try again')</script>";
+}
+}
+}
 ?>
