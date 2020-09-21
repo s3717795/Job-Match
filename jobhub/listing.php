@@ -1,18 +1,21 @@
 <?php
 session_start();
 require_once("php/account_class.php");
+require_once("php/job_class.php");
 require_once("php/db_inc.php");
 
 $Account = new Account();
+$Job = new Job();
 
-if(!(isset($_SESSION['user_id'])))
-{
-    header($_SESSION['currentpage']);
-}
+//if(!(isset($_SESSION['user_id'])))
+//{
+//    header($_SESSION['currentpage']);
+//}
 
 $link = $conn = mysqli_connect("localhost", "outsideadmin", "bLb$?Se%@6@U*5CK", "login_system");
 $row_cnt = mysqli_num_rows(mysqli_query($conn,"SELECT job_id FROM jobs"));
 
+$count = 0;
 ?>
 
 
@@ -45,7 +48,7 @@ $row_cnt = mysqli_num_rows(mysqli_query($conn,"SELECT job_id FROM jobs"));
 </head>
 <body>
     <!-- ? Preloader Start -->
-    <div id="preloader-active">
+<!--    <div id="preloader-active">
         <div class="preloader d-flex align-items-center justify-content-center">
             <div class="preloader-inner position-relative">
                 <div class="preloader-circle"></div>
@@ -54,7 +57,7 @@ $row_cnt = mysqli_num_rows(mysqli_query($conn,"SELECT job_id FROM jobs"));
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
     <!-- Preloader Start -->
     <header>
         <!-- Header Start -->
@@ -139,9 +142,9 @@ $row_cnt = mysqli_num_rows(mysqli_query($conn,"SELECT job_id FROM jobs"));
                                 <h1>Explore what you are finding</h1>
                             </div>
                             <!--Hero form -->
-                            <form action="#" class="search-box mb-100">
+                            <form id="jobsearch" action="listing.php" class="search-box mb-100" method="POST">
                                 <div class="input-form">
-                                    <input type="text" placeholder="What are you finding?">
+                                    <input type="text" name="search_query" placeholder="What are you finding?">
                                 </div>
                                 <div class="select-form">
                                     <div class="select-itms">
@@ -155,7 +158,7 @@ $row_cnt = mysqli_num_rows(mysqli_query($conn,"SELECT job_id FROM jobs"));
                                     </div>
                                 </div>
                                 <div class="search-form">
-                                    <a href="#"><i class="ti-search"></i> Search</a>
+                                    <a href="#" onclick="document.getElementById('jobsearch').submit()"><i class="ti-search"></i> Search</a>
                                 </div>	
                             </form>	
                         </div>
@@ -279,7 +282,21 @@ $row_cnt = mysqli_num_rows(mysqli_query($conn,"SELECT job_id FROM jobs"));
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="count mb-35">
-                                    <span><?php echo $row_cnt ?> Listings are available</span>
+                                    <span><?php
+                                        if(isset($_POST['search_query'])){
+                                            $results = $Job->searchJob($_POST['search_query']);
+                                            if(mysqli_num_rows($results)>0)
+                                            {
+                                                while($row = mysqli_fetch_assoc($results))
+                                                {
+                                                    $count++;
+                                                }
+                                            }
+                                            echo $count;
+                                        } else
+                                        {
+                                            echo $row_cnt;
+                                        }?> Listings are available</span>
                                 </div>
                             </div>
                         </div>
@@ -290,6 +307,54 @@ $row_cnt = mysqli_num_rows(mysqli_query($conn,"SELECT job_id FROM jobs"));
 
                                 $ret=mysqli_query($link,"SELECT * FROM jobs");
                                 $cnt=1;
+
+                                if(isset($_POST['search_query']))
+                                {
+                                    $results = $Job->searchJob($_POST['search_query']);
+
+//                                    echo $_POST['search_query'].'<br>';
+//                                    echo "testing";
+
+                                    if(mysqli_num_rows($results)>0)
+                                    {
+                                        while($row = mysqli_fetch_assoc($results))
+                                        {
+                                            ?>
+                                            <div class="col-lg-6">
+                                                <!-- Single -->
+                                                <div class="properties properties2 mb-30">
+                                                    <div class="properties__card">
+                                                        <div class="properties__img overlay1">
+                                                            <a href="#"><img src="assets/img/gallery/properties1.png" alt=""></a>
+                                                            <div class="img-text">
+
+                                                            </div>
+                                                            <div class="icon">
+                                                                <img src="assets/img/gallery/categori_icon1.png" alt="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="properties__caption">
+                                                            <h3><a href="job_details.php?jobid=<?php echo $row['job_id'];?>"><?php echo $row['job_name'];?></a></h3>
+                                                            <p><?php echo $row['job_short_desc'];?></p>
+                                                        </div>
+                                                        <div class="properties__footer d-flex justify-content-between align-items-center">
+                                                            <div class="restaurant-name">
+                                                                <img src="assets/img/gallery/restaurant-icon.png" alt="">
+                                                                <h3>$<?php echo $row['job_salary'];?></h3>
+                                                            </div>
+                                                            <div class="heart">
+                                                                <img src="assets/img/gallery/heart1.png" alt="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <?php
+                                            $count++;
+                                        }
+                                    }
+                                }
+                                else
                                 while($row=mysqli_fetch_array($ret))
                                 {
                                 ?>

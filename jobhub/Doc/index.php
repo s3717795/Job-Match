@@ -1,9 +1,13 @@
+<?php
+session_start();
+$_SESSION["currentpage"] = "index.php";
+?>
 <!doctype html>
 <html class="no-js" lang="zxx">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Job board | Template</title>
+    <title>Job Match</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
@@ -26,437 +30,458 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <!-- ? Preloader Start -->
-    <div id="preloader-active">
-        <div class="preloader d-flex align-items-center justify-content-center">
-            <div class="preloader-inner position-relative">
-                <div class="preloader-circle"></div>
-                <div class="preloader-img pere-text">
-                    <img src="assets/img/logo/loder.png" alt="">
+<!-- ? Preloader Start -->
+<div id="preloader-active">
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="preloader-inner position-relative">
+            <div class="preloader-circle"></div>
+            <div class="preloader-img pere-text">
+                <img src="assets/img/logo/loder.png" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Preloader Start -->
+<header>
+    <!-- Header Start -->
+    <div class="header-area header-transparent">
+        <div class="main-header ">
+            <div class="header-bottom  header-sticky">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <!-- Logo -->
+                        <div class="col-xl-2 col-lg-2">
+                            <div class="logo">
+                                <a href="index.php"><img src="assets/img/logo/logo.png" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="col-xl-10 col-lg-10">
+                            <div class="menu-wrapper  d-flex align-items-center justify-content-end">
+                                <!-- Main-menu -->
+                                <div class="main-menu d-none d-lg-block">
+                                    <nav>
+                                        <ul id="navigation">
+                                            <li><a href="index.php">Home</a></li>
+                                            <li><a href="listing.php">Listings</a></li>
+                                            <?php
+                                            $add_job_text = "";
+                                            $modified_link2 = "";
+
+                                            if (isset($_SESSION["user_id"]))
+                                            {
+                                                $add_job_text = "Add job";
+                                                $modified_link2 = "<a href='add_job.php'>";
+                                                echo "<li>".$modified_link2.$add_job_text."</a></li>";
+                                            }
+                                            ?>
+                                            <li><a href="categori.html">Categories</a></li>
+                                            <li><a href="#">Pages</a>
+                                                <ul class="submenu">
+                                                    <li><a href="about.html">about</a></li>
+                                                    <li><a href="blog.html">Blog</a></li>
+                                                    <li><a href="blog_details.html">Blog Details</a></li>
+                                                    <li><a href="elements.html">Element</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><?php
+                                                $login_text = "Log in";
+                                                $modified_link = "<a href='login.php'>";
+
+                                                if (isset($_SESSION["user_id"]))
+                                                {
+                                                    $login_text = "Profile";
+                                                    $modified_link = "<a href='profile.php'>";
+                                                }
+                                                ?><?php echo $modified_link.$login_text; ?></a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                                <!-- Header-btn -->
+                                <div class="header-right-btn d-none d-lg-block ml-65">
+                                    <a href="add_job.php" class="border-btn">Post a Job</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Mobile Menu -->
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Preloader Start -->
-    <header>
-        <!-- Header Start -->
-        <div class="header-area header-transparent">
-            <div class="main-header ">
-                <div class="header-bottom  header-sticky">
-                    <div class="container-fluid">
-                        <div class="row align-items-center">
-                            <!-- Logo -->
-                            <div class="col-xl-2 col-lg-2">
-                                <div class="logo">
-                                    <a href="index.php"><img src="assets/img/logo/logo.png" alt=""></a>
+    <!-- Header End -->
+</header>
+<!-- header end -->
+<main>
+    <!-- Hero Area Start-->
+    <div class="slider-area">
+        <div class="single-slider slider-height d-flex align-items-center">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-8 col-lg-9">
+                        <!-- Hero Caption -->
+                        <div class="hero__caption">
+                            <h1>Find your dream job.</h1>
+                            <p>The automated process starts as soon as your clothes go into the machine. The outcome is gleaming clothes. Placeholder text commonly used.</p>
+                        </div>
+                    </div>
+                    <div class="col-xl-11 col-lg-12">
+                        <!--Hero form -->
+                        <form id="jobsearch" action="listing.php" class="search-box" method="POST">
+                            <div class="input-form">
+                                <input type="text" name="search_query" placeholder="Job title or keywords">
+                                <!-- icon -->
+                                <div class="icon">
+                                    <i class="fas fa-pencil-alt"></i>
                                 </div>
                             </div>
-                            <div class="col-xl-10 col-lg-10">
-                                <div class="menu-wrapper  d-flex align-items-center justify-content-end">
-                                    <!-- Main-menu -->
-                                    <div class="main-menu d-none d-lg-block">
-                                        <nav>
-                                            <ul id="navigation">                                                                                          
-                                                <li><a href="index.php">Home</a></li>
-                                                <li><a href="categori.html">Categories</a></li>
-                                                <li><a href="#">Pages</a>
-                                                    <ul class="submenu">
-                                                        <li><a href="about.html">about</a></li>
-                                                        <li><a href="blog.html">Blog</a></li>
-                                                        <li><a href="blog_details.html">Blog Details</a></li>
-                                                        <li><a href="elements.html">Element</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="login.php">Log in</a></li>
-                                            </ul>
-                                        </nav>
-                                    </div>
-                                    <!-- Header-btn -->
-                                    <div class="header-right-btn d-none d-lg-block ml-65">
-                                        <a href="contact.html" class="border-btn">Post a Job</a>
-                                    </div>
+                            <div class="input-form2">
+                                <input type="text"  name="state" placeholder="Where?">
+                                <!-- icon -->
+                                <div class="icon">
+                                    <i class="fas fa-map-marker-alt"></i>
                                 </div>
-                            </div> 
-                            <!-- Mobile Menu -->
-                            <div class="col-12">
-                                <div class="mobile_menu d-block d-lg-none"></div>
                             </div>
+                            <div class="select-form">
+                                <div class="select-itms">
+                                    <select name="select" id="select1">
+                                        <option value="">Category</option>
+                                        <option value="">Catagories One</option>
+                                        <option value="">Catagories Two</option>
+                                        <option value="">Catagories Three</option>
+                                        <option value="">Catagories Four</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="search-form">
+                                <a href="#" onclick="document.getElementById('jobsearch').submit()"><i class="fas fa-search"></i> Search</a>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="popular-search text-center pt-30">
+                            <ul>
+                                <li><p>Popular search:</p></li>
+                                <li><a href="#">#User experience designer</a></li>
+                                <li><a href="#">#Marketing</a></li>
+                                <li><a href="#">#Programmer</a></li>
+                                <li><a href="#">#Finance</a></li>
+                                <li><a href="#">#UI designer</a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Header End -->
-    </header>
-    <!-- header end -->
-    <main>
-        <!-- Hero Area Start-->
-        <div class="slider-area">
-            <div class="single-slider slider-height d-flex align-items-center">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-xl-8 col-lg-9">
-                            <!-- Hero Caption -->
-                            <div class="hero__caption">
-                                <h1>Find your dream job.</h1>
-                                <p>The automated process starts as soon as your clothes go into the machine. The outcome is gleaming clothes. Placeholder text commonly used.</p>
-                            </div>
-                        </div>
-                        <div class="col-xl-11 col-lg-12">
-                            <!--Hero form -->
-                            <form action="#" class="search-box">
-                                <div class="input-form">
-                                    <input type="text" name="keywords" placeholder="Job title or keywords">
-                                    <!-- icon -->
-                                    <div class="icon">
-                                        <i class="fas fa-pencil-alt"></i>
-                                    </div>
-                                </div>
-                                <div class="input-form2">
-                                    <input type="text"  name="state" placeholder="Where?">
-                                    <!-- icon -->
-                                    <div class="icon">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                    </div>
-                                </div>
-                                <div class="select-form">
-                                    <div class="select-itms">
-                                        <select name="select" id="select1">
-                                            <option value="">Category</option>
-                                            <option value="">Catagories One</option>
-                                            <option value="">Catagories Two</option>
-                                            <option value="">Catagories Three</option>
-                                            <option value="">Catagories Four</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="search-form">
-                                    <a href="#"><i class="fas fa-search"></i> Search</a>
-                                </div>		
-                            </form>	
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="popular-search text-center pt-30">
-                                <ul>
-                                    <li><p>Popular search:</p></li>
-                                    <li><a href="#">#User experience designer</a></li>
-                                    <li><a href="#">#Marketing</a></li>
-                                    <li><a href="#">#Programmer</a></li>
-                                    <li><a href="#">#Finance</a></li>
-                                    <li><a href="#">#UI designer</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
+        </div>
+    </div>
+    <!--Hero Area End-->
+    <!--? Brand Area Start -->
+    <!--       <div class="brand-area">
+               <div class="container">
+                   <div class="brand-active brand-border pt-50 pb-40">
+                       <div class="single-brand">
+                           <img src="assets/img/gallery/brand1.png" alt="">
+                       </div>
+                       <div class="single-brand">
+                           <img src="assets/img/gallery/brand2.png" alt="">
+                       </div>
+                       <div class="single-brand">
+                           <img src="assets/img/gallery/brand3.png" alt="">
+                       </div>
+                       <div class="single-brand">
+                           <img src="assets/img/gallery/brand4.png" alt="">
+                       </div>
+                       <div class="single-brand">
+                           <img src="assets/img/gallery/brand2.png" alt="">
+                       </div>
+                       <div class="single-brand">
+                           <img src="assets/img/gallery/brand5.png" alt="">
+                       </div>
+                       <div class="single-brand">
+                           <img src="assets/img/gallery/brand4.png" alt="">
+                       </div>
+                       <div class="single-brand">
+                           <img src="assets/img/gallery/brand4.png" alt="">
+                       </div>
+                   </div>
+               </div>
+           </div>-->
+    <!-- Brand Area End -->
+    <!--? Our Services Start -->
+    <section class="our-services  section-padding40">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-8 col-lg-8">
+                    <!-- Section Tittle -->
+                    <div class="section-tittle text-center mb-80">
+                        <h2>Browse from over <span style="color:#367FFF ;"> 2000+</span> jobs</h2>
+                        <p>The automated process starts as soon as your clothes go into the machine. The outcome is
+                            gleaming clothes. Placeholder text commonly used.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row no-gutters">
+                <div class=" col-lg-4 col-md-6 col-sm-6">
+                    <div class="single-services">
+                        <div class="services-ion">
+                            <img src="assets/img/icon/services1.svg" alt="">
+                        </div>
+                        <div class="services-cap">
+                            <h5><a href="#">Design & creatives</a></h5>
+                            <p>The automated process starts as soon as your clothes go into.</p>
+                            <a href="#" class="more-btn">Browse Job</a>
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-lg-4 col-md-6 col-sm-6">
+                    <div class="single-services">
+                        <div class="services-ion">
+                            <img src="assets/img/icon/services2.svg" alt="">
+                        </div>
+                        <div class="services-cap">
+                            <h5><a href="#">Design & creatives</a></h5>
+                            <p>The automated process starts as soon as your clothes go into.</p>
+                            <a href="#" class="more-btn">Browse Job</a>
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-lg-4 col-md-6 col-sm-6">
+                    <div class="single-services">
+                        <div class="services-ion">
+                            <img src="assets/img/icon/services3.svg" alt="">
+                        </div>
+                        <div class="services-cap">
+                            <h5><a href="#">Design & creatives</a></h5>
+                            <p>The automated process starts as soon as your clothes go into.</p>
+                            <a href="#" class="more-btn">Browse Job</a>
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-lg-4 col-md-6 col-sm-6">
+                    <div class="single-services">
+                        <div class="services-ion">
+                            <img src="assets/img/icon/services4.svg" alt="">
+                        </div>
+                        <div class="services-cap">
+                            <h5><a href="#">Design & creatives</a></h5>
+                            <p>The automated process starts as soon as your clothes go into.</p>
+                            <a href="#" class="more-btn">Browse Job</a>
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-lg-4 col-md-6 col-sm-6">
+                    <div class="single-services">
+                        <div class="services-ion">
+                            <img src="assets/img/icon/services5.svg" alt="">
+                        </div>
+                        <div class="services-cap">
+                            <h5><a href="#">Design & creatives</a></h5>
+                            <p>The automated process starts as soon as your clothes go into.</p>
+                            <a href="#" class="more-btn">Browse Job</a>
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-lg-4 col-md-6 col-sm-6">
+                    <div class="single-services">
+                        <div class="services-ion">
+                            <img src="assets/img/icon/services6.svg" alt="">
+                        </div>
+                        <div class="services-cap">
+                            <h5><a href="#">Design & creatives</a></h5>
+                            <p>The automated process starts as soon as your clothes go into.</p>
+                            <a href="#" class="more-btn">Browse Job</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <!--Hero Area End-->
-        <!--? Brand Area Start -->
-<!--        <div class="brand-area">
-            <div class="container">
-                <div class="brand-active brand-border pt-50 pb-40">
-                    <div class="single-brand">
-                        <img src="assets/img/gallery/brand1.png" alt="">
-                    </div>
-                    <div class="single-brand">
-                        <img src="assets/img/gallery/brand2.png" alt="">
-                    </div>
-                    <div class="single-brand">
-                        <img src="assets/img/gallery/brand3.png" alt="">
-                    </div>
-                    <div class="single-brand">
-                        <img src="assets/img/gallery/brand4.png" alt="">
-                    </div>
-                    <div class="single-brand">
-                        <img src="assets/img/gallery/brand2.png" alt="">
-                    </div>
-                    <div class="single-brand">
-                        <img src="assets/img/gallery/brand5.png" alt="">
-                    </div>
-                    <div class="single-brand">
-                        <img src="assets/img/gallery/brand4.png" alt="">
-                    </div>
-                    <div class="single-brand">
-                        <img src="assets/img/gallery/brand4.png" alt="">
-                    </div>
+    </section>
+    <!-- Our Services End -->
+    <!--? About Area Start-->
+    <section class="about-area fix">
+        <!--Right Contents  -->
+        <div class="about-img">
+            <div class="info-man text-center">
+                <div class="head-cap">
+                    <h3>89027+</h3>
+                </div>
+                <p>Talented waiting for hire</p>
+            </div>
+        </div>
+        <!-- left Contents -->
+        <div class="about-details">
+            <div class="right-caption">
+                <!-- Section Tittle -->
+                <div class="section-tittle mb-20">
+                    <h2>Want to hire perfect person?</h2>
+                </div>
+                <div class="about-more">
+                    <p class="mb-45 pera-bottom">The automated process starts as soon as your clothes go into the machine. The outcome is gleaming clothes. Placeholder text commonly used. In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying.</p>
+                    <a href="#" class="btn">Browse Talents</a>
                 </div>
             </div>
-        </div>-->
-        <!-- Brand Area End -->
-        <!--? Our Services Start -->
-        <section class="our-services  section-padding40">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-xl-8 col-lg-8">
-                        <!-- Section Tittle -->
-                        <div class="section-tittle text-center mb-80">
-                            <h2>Browse from over <span style="color:#367FFF ;"> 2000+</span> jobs</h2>
-                            <p>The automated process starts as soon as your clothes go into the machine. The outcome is 
-                            gleaming clothes. Placeholder text commonly used.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row no-gutters">
-                    <div class=" col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-services">
-                            <div class="services-ion">
-                                <img src="assets/img/icon/services1.svg" alt="">
-                            </div>
-                            <div class="services-cap">
-                                <h5><a href="#">Design & creatives</a></h5>
-                                <p>The automated process starts as soon as your clothes go into.</p>
-                                <a href="#" class="more-btn">Browse Job</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class=" col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-services">
-                            <div class="services-ion">
-                                <img src="assets/img/icon/services2.svg" alt="">
-                            </div>
-                            <div class="services-cap">
-                                <h5><a href="#">Design & creatives</a></h5>
-                                <p>The automated process starts as soon as your clothes go into.</p>
-                                <a href="#" class="more-btn">Browse Job</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class=" col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-services">
-                            <div class="services-ion">
-                                <img src="assets/img/icon/services3.svg" alt="">
-                            </div>
-                            <div class="services-cap">
-                                <h5><a href="#">Design & creatives</a></h5>
-                                <p>The automated process starts as soon as your clothes go into.</p>
-                                <a href="#" class="more-btn">Browse Job</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class=" col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-services">
-                            <div class="services-ion">
-                                <img src="assets/img/icon/services4.svg" alt="">
-                            </div>
-                            <div class="services-cap">
-                                <h5><a href="#">Design & creatives</a></h5>
-                                <p>The automated process starts as soon as your clothes go into.</p>
-                                <a href="#" class="more-btn">Browse Job</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class=" col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-services">
-                            <div class="services-ion">
-                                <img src="assets/img/icon/services5.svg" alt="">
-                            </div>
-                            <div class="services-cap">
-                                <h5><a href="#">Design & creatives</a></h5>
-                                <p>The automated process starts as soon as your clothes go into.</p>
-                                <a href="#" class="more-btn">Browse Job</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class=" col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-services">
-                            <div class="services-ion">
-                                <img src="assets/img/icon/services6.svg" alt="">
-                            </div>
-                            <div class="services-cap">
-                                <h5><a href="#">Design & creatives</a></h5>
-                                <p>The automated process starts as soon as your clothes go into.</p>
-                                <a href="#" class="more-btn">Browse Job</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Our Services End -->
-        <!--? About Area Start-->
-        <section class="about-area fix">
-            <!--Right Contents  -->
-            <div class="about-img">
-                <div class="info-man text-center">
-                    <div class="head-cap">
-                        <h3>89027+</h3>
-                    </div>
-                    <p>Talented waiting for hire</p>
-                </div>
-            </div>
-            <!-- left Contents -->
-            <div class="about-details">
-                <div class="right-caption">
+        </div>
+    </section>
+    <!-- About Area End-->
+    <!--? Top Jobs Start -->
+    <section class="top-jobs  section-padding40 fix">
+        <div class="container-fluid p-0">
+            <div class="row justify-content-center">
+                <div class="col-xl-4 col-lg-7 col-md-9">
                     <!-- Section Tittle -->
-                    <div class="section-tittle mb-20">
-                        <h2>Want to hire perfect person?</h2>
-                    </div>
-                    <div class="about-more">
-                        <p class="mb-45 pera-bottom">The automated process starts as soon as your clothes go into the machine. The outcome is gleaming clothes. Placeholder text commonly used. In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying.</p>
-                        <a href="#" class="btn">Browse Talents</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- About Area End-->
-        <!--? Top Jobs Start -->
-        <section class="top-jobs  section-padding40 fix">
-            <div class="container-fluid p-0">
-                <div class="row justify-content-center">
-                    <div class="col-xl-4 col-lg-7 col-md-9">
-                        <!-- Section Tittle -->
-                        <div class="section-tittle text-center mb-80">
-                            <h2>Browse top jobs</h2>
-                            <p>The automated process starts as soon as your clothes go into the machine. The outcome is 
+                    <div class="section-tittle text-center mb-80">
+                        <h2>Browse top jobs</h2>
+                        <p>The automated process starts as soon as your clothes go into the machine. The outcome is
                             gleaming clothes. Placeholder text commonly used.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="top-job-slider">
-                    <!-- Single -->
-                    <div class="single-top-jobs">
-                        <div class="services-ion">
-                            <img src="assets/img/icon/jon-iocn1.svg" alt="">
-                        </div>
-                        <div class="services-cap">
-                            <h5><a href="#">Design & creatives</a></h5>
-                            <p>The automated process starts as soon as your clothes go into.</p>
-                            <a href="#" class="btn">Apply Now</a>
-                        </div>
-                        <div class="stickers">
-                            <span>Remote</span>
-                        </div>
-                    </div>
-                    <!-- Single -->
-                    <div class="single-top-jobs">
-                        <div class="services-ion">
-                            <img src="assets/img/icon/jon-iocn2.svg" alt="">
-                        </div>
-                        <div class="services-cap">
-                            <h5><a href="#">Design & creatives</a></h5>
-                            <p>The automated process starts as soon as your clothes go into.</p>
-                            <a href="#" class="btn">Apply Now</a>
-                        </div>
-                        <div class="stickers">
-                            <span>Remote</span>
-                        </div>
-                    </div>
-                    <!-- Single -->
-                    <div class="single-top-jobs">
-                        <div class="services-ion">
-                            <img src="assets/img/icon/jon-iocn3.svg" alt="">
-                        </div>
-                        <div class="services-cap">
-                            <h5><a href="#">Design & creatives</a></h5>
-                            <p>The automated process starts as soon as your clothes go into.</p>
-                            <a href="#" class="btn">Apply Now</a>
-                        </div>
-                        <div class="stickers">
-                            <span>Remote</span>
-                        </div>
-                    </div>
-                    <!-- Single -->
-                    <div class="single-top-jobs">
-                        <div class="services-ion">
-                            <img src="assets/img/icon/jon-iocn4.svg" alt="">
-                        </div>
-                        <div class="services-cap">
-                            <h5><a href="#">Design & creatives</a></h5>
-                            <p>The automated process starts as soon as your clothes go into.</p>
-                            <a href="#" class="btn">Apply Now</a>
-                        </div>
-                        <div class="stickers">
-                            <span>Remote</span>
-                        </div>
-                    </div>
-                    <!-- Single -->
-                    <div class="single-top-jobs">
-                        <div class="services-ion">
-                            <img src="assets/img/icon/jon-iocn5.svg" alt="">
-                        </div>
-                        <div class="services-cap">
-                            <h5><a href="#">Design & creatives</a></h5>
-                            <p>The automated process starts as soon as your clothes go into.</p>
-                            <a href="#" class="btn">Apply Now</a>
-                        </div>
-                        <div class="stickers">
-                            <span>Remote</span>
-                        </div>
-                    </div>
-                    <!-- Single -->
-                    <div class="single-top-jobs">
-                        <div class="services-ion">
-                            <img src="assets/img/icon/jon-iocn2.svg" alt="">
-                        </div>
-                        <div class="services-cap">
-                            <h5><a href="#">Design & creatives</a></h5>
-                            <p>The automated process starts as soon as your clothes go into.</p>
-                            <a href="#" class="btn">Apply Now</a>
-                        </div>
-                        <div class="stickers">
-                            <span>Remote</span>
-                        </div>
                     </div>
                 </div>
             </div>
-        </section>
-        <!-- Top Jobs End -->
-        <!--? job Post Start -->
-        <section class="job-post  pt-top section-bg2">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 ">
-                        <div class="single-features mb-40 pt-60">
-                            <div class="job-post-banner">
-                                <img src="assets/img/gallery/job-pos-banner1.png" alt="">
-                            </div>
-                            <div class="features-caption">
-                                <h3>Post a job</h3>
-                                <p>The automated process starts as soon as your clothes go into.</p>
-                                <a href="#" class="border-btn">Post a Job</a>
-                            </div>
-                        </div>
+            <div class="top-job-slider">
+                <!-- Single -->
+                <div class="single-top-jobs">
+                    <div class="services-ion">
+                        <img src="assets/img/icon/jon-iocn1.svg" alt="">
                     </div>
-                    <div class="col-lg-6 ">
-                        <div class="single-features  single-features2 mb-40 pt-60">
-                            <div class="job-post-banner">
-                                <img src="assets/img/gallery/job-pos-banner2.png" alt="">
-                            </div>
-                            <div class="features-caption">
-                                <h3>Browse for job</h3>
-                                <p>The automated process starts as soon as your clothes go into.</p>
-                                <a href="#" class="border-btn">Browse Job</a>
-                            </div>
-                        </div>
+                    <div class="services-cap">
+                        <h5><a href="#">Design & creatives</a></h5>
+                        <p>The automated process starts as soon as your clothes go into.</p>
+                        <a href="#" class="btn">Apply Now</a>
                     </div>
-                </div>  
+                    <div class="stickers">
+                        <span>Remote</span>
+                    </div>
+                </div>
+                <!-- Single -->
+                <div class="single-top-jobs">
+                    <div class="services-ion">
+                        <img src="assets/img/icon/jon-iocn2.svg" alt="">
+                    </div>
+                    <div class="services-cap">
+                        <h5><a href="#">Design & creatives</a></h5>
+                        <p>The automated process starts as soon as your clothes go into.</p>
+                        <a href="#" class="btn">Apply Now</a>
+                    </div>
+                    <div class="stickers">
+                        <span>Remote</span>
+                    </div>
+                </div>
+                <!-- Single -->
+                <div class="single-top-jobs">
+                    <div class="services-ion">
+                        <img src="assets/img/icon/jon-iocn3.svg" alt="">
+                    </div>
+                    <div class="services-cap">
+                        <h5><a href="#">Design & creatives</a></h5>
+                        <p>The automated process starts as soon as your clothes go into.</p>
+                        <a href="#" class="btn">Apply Now</a>
+                    </div>
+                    <div class="stickers">
+                        <span>Remote</span>
+                    </div>
+                </div>
+                <!-- Single -->
+                <div class="single-top-jobs">
+                    <div class="services-ion">
+                        <img src="assets/img/icon/jon-iocn4.svg" alt="">
+                    </div>
+                    <div class="services-cap">
+                        <h5><a href="#">Design & creatives</a></h5>
+                        <p>The automated process starts as soon as your clothes go into.</p>
+                        <a href="#" class="btn">Apply Now</a>
+                    </div>
+                    <div class="stickers">
+                        <span>Remote</span>
+                    </div>
+                </div>
+                <!-- Single -->
+                <div class="single-top-jobs">
+                    <div class="services-ion">
+                        <img src="assets/img/icon/jon-iocn5.svg" alt="">
+                    </div>
+                    <div class="services-cap">
+                        <h5><a href="#">Design & creatives</a></h5>
+                        <p>The automated process starts as soon as your clothes go into.</p>
+                        <a href="#" class="btn">Apply Now</a>
+                    </div>
+                    <div class="stickers">
+                        <span>Remote</span>
+                    </div>
+                </div>
+                <!-- Single -->
+                <div class="single-top-jobs">
+                    <div class="services-ion">
+                        <img src="assets/img/icon/jon-iocn2.svg" alt="">
+                    </div>
+                    <div class="services-cap">
+                        <h5><a href="#">Design & creatives</a></h5>
+                        <p>The automated process starts as soon as your clothes go into.</p>
+                        <a href="#" class="btn">Apply Now</a>
+                    </div>
+                    <div class="stickers">
+                        <span>Remote</span>
+                    </div>
+                </div>
             </div>
-        </section>
-        <!-- job Post End -->
-        <!--? Want To work 01-->
-        <section class="wantToWork-area">
-            <div class="container">
-                <div class="wants-wrapper w-padding2">
-                    <div class="row align-items-center justify-content-between">
-                        <div class="col-xl-7 col-lg-9 col-md-8">
-                            <div class="wantToWork-caption wantToWork-caption2">
-                                <h2>Start finding your dream job</h2>
-                                <p>The automated process starts as soon as your clothes go into the machine. The outcome is gleaming clothes placeholder text commonly used.</p>
-                            </div>
+        </div>
+    </section>
+    <!-- Top Jobs End -->
+    <!--? job Post Start -->
+    <section class="job-post  pt-top section-bg2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 ">
+                    <div class="single-features mb-40 pt-60">
+                        <div class="job-post-banner">
+                            <img src="assets/img/gallery/job-pos-banner1.png" alt="">
                         </div>
-                        <div class="col-xl-2 col-lg-3 ">
-                            <a href="#" class="btn f-right wantToWork-btn">Browse Job</a>
+                        <div class="features-caption">
+                            <h3>Post a job</h3>
+                            <p>The automated process starts as soon as your clothes go into.</p>
+                            <a href="#" class="border-btn">Post a Job</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 ">
+                    <div class="single-features  single-features2 mb-40 pt-60">
+                        <div class="job-post-banner">
+                            <img src="assets/img/gallery/job-pos-banner2.png" alt="">
+                        </div>
+                        <div class="features-caption">
+                            <h3>Browse for job</h3>
+                            <p>The automated process starts as soon as your clothes go into.</p>
+                            <a href="#" class="border-btn">Browse Job</a>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-        <!-- Want To work End -->
-    </main>
-    <footer>
-     <div class="footer-wrappper pl-100 pr-100 section-bg" data-background="assets/img/gallery/footer-bg.png">
+        </div>
+    </section>
+    <!-- job Post End -->
+    <!--? Want To work 01-->
+    <section class="wantToWork-area">
+        <div class="container">
+            <div class="wants-wrapper w-padding2">
+                <div class="row align-items-center justify-content-between">
+                    <div class="col-xl-7 col-lg-9 col-md-8">
+                        <div class="wantToWork-caption wantToWork-caption2">
+                            <h2>Start finding your dream job</h2>
+                            <p>The automated process starts as soon as your clothes go into the machine. The outcome is gleaming clothes placeholder text commonly used.</p>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-3 ">
+                        <a href="#" class="btn f-right wantToWork-btn">Browse Job</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Want To work End -->
+</main>
+<footer>
+    <div class="footer-wrappper pl-100 pr-100 section-bg" data-background="assets/img/gallery/footer-bg.png">
         <!-- Footer Start-->
         <div class="footer-area footer-padding">
             <div class="container-fluid">
@@ -534,41 +559,41 @@
                             <div class="footer-form" >
                                 <div id="mc_embed_signup">
                                     <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
-                                    method="get" class="subscribe_form relative mail_part">
-                                    <input type="email" name="email" id="newsletter-form-email" placeholder="Email Address"
-                                    class="placeholder hide-on-focus" onfocus="this.placeholder = ''"
-                                    onblur="this.placeholder = ' Email Address '">
-                                    <div class="form-icon">
-                                        <button type="submit" name="submit" id="newsletter-submit"
-                                        class="email_icon newsletter-submit button-contactForm"><img src="assets/img/gallery/form.png" alt=""></button>
-                                    </div>
-                                    <div class="mt-10 info"></div>
-                                </form>
+                                          method="get" class="subscribe_form relative mail_part">
+                                        <input type="email" name="email" id="newsletter-form-email" placeholder="Email Address"
+                                               class="placeholder hide-on-focus" onfocus="this.placeholder = ''"
+                                               onblur="this.placeholder = ' Email Address '">
+                                        <div class="form-icon">
+                                            <button type="submit" name="submit" id="newsletter-submit"
+                                                    class="email_icon newsletter-submit button-contactForm"><img src="assets/img/gallery/form.png" alt=""></button>
+                                        </div>
+                                        <div class="mt-10 info"></div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- footer-bottom area -->
+        <div class="footer-bottom-area">
+            <div class="container">
+                <div class="footer-border">
+                    <div class="row d-flex align-items-center">
+                        <div class="col-xl-12 ">
+                            <div class="footer-copy-right text-center">
+                                <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End-->
     </div>
-    <!-- footer-bottom area -->
-    <div class="footer-bottom-area">
-        <div class="container">
-            <div class="footer-border">
-                <div class="row d-flex align-items-center">
-                    <div class="col-xl-12 ">
-                        <div class="footer-copy-right text-center">
-                            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                              Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <!-- Footer End-->
-  </div>
 </footer>
 
 <!-- Scroll Up -->
@@ -615,7 +640,7 @@
 <script src="./assets/js/mail-script.js"></script>
 <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
 
-<!-- Jquery Plugins, main Jquery -->	
+<!-- Jquery Plugins, main Jquery -->
 <script src="./assets/js/plugins.js"></script>
 <script src="./assets/js/main.js"></script>
 

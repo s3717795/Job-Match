@@ -129,9 +129,9 @@ $_SESSION["currentpage"] = "index.php";
                         </div>
                         <div class="col-xl-11 col-lg-12">
                             <!--Hero form -->
-                            <form action="#" class="search-box">
+                            <form id="jobsearch" action="listing.php" class="search-box" method="POST">
                                 <div class="input-form">
-                                    <input type="text" name="keywords" placeholder="Job title or keywords">
+                                    <input type="text" name="search_query" placeholder="Job title or keywords">
                                     <!-- icon -->
                                     <div class="icon">
                                         <i class="fas fa-pencil-alt"></i>
@@ -156,9 +156,9 @@ $_SESSION["currentpage"] = "index.php";
                                     </div>
                                 </div>
                                 <div class="search-form">
-                                    <a href="#"><i class="fas fa-search"></i> Search</a>
+                                    <a href="#" onclick="document.getElementById('jobsearch').submit()"><i class="fas fa-search"></i> Search</a>
                                 </div>		
-                            </form>	
+                            </form>
                         </div>
                         <div class="col-lg-12">
                             <div class="popular-search text-center pt-30">
