@@ -113,29 +113,17 @@ $_SESSION['currentpage'] = "register.php";
 	<link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <!-- ? Preloader Start -->
-    <div id="preloader-active">
-        <div class="preloader d-flex align-items-center justify-content-center">
-            <div class="preloader-inner position-relative">
-                <div class="preloader-circle"></div>
-                <div class="preloader-img pere-text">
-                    <img src="assets/img/logo/loder.png" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Preloader Start-->
 
 <!-- Register -->
     <div>
-        <main class="login-body" data-vide-bg="assets/img/login-bg.mp4">
+        <main class="login-body"> <!-- data-vide-bg="assets/img/login-bg.mp4"-->
             <!-- Login Admin -->
             <form class="form-default" action="php/registering.php" method="POST">
 
                 <div class="login-form">
                     <!-- logo-login -->
                     <div class="logo-login">
-                        <a href="index.php"><img src="assets/img/logo/loder.png" alt=""></a>
+                        <a href="index.php"><img src="assets/img/logo/JobMatchLogo.png" alt=""></a>
                     </div>
                     <h2>Register Here</h2>
                         <div class="form-input">

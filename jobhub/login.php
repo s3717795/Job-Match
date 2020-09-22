@@ -71,28 +71,15 @@ $_SESSION['current_page'] = "login.php";
 	<link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <!-- ? Preloader Start -->
-    <div id="preloader-active">
-        <div class="preloader d-flex align-items-center justify-content-center">
-            <div class="preloader-inner position-relative">
-                <div class="preloader-circle"></div>
-                <div class="preloader-img pere-text">
-                    <img src="assets/img/logo/loder.png" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Preloader Start-->
 
-
-<main class="login-body" data-vide-bg="assets/img/login-bg.mp4">
+<main class="login-body"> <!--data-vide-bg="assets/img/login-bg.mp4"-->
     <!-- Login Admin -->
     <form class="form-default" action="php/logging_in.php" method="POST">
         
         <div class="login-form">
             <!-- logo-login -->
             <div class="logo-login">
-                <a href="index.php"><img src="assets/img/logo/loder.png" alt=""></a>
+                <a href="index.php"><img src="assets/img/logo/JobMatchLogo.png" alt=""></a>
             </div>
             <h2>Login Here</h2>
             <h1 style="color:red;"><?php echo $wrong_password; ?></h1>
@@ -128,7 +115,7 @@ $_SESSION['current_page'] = "login.php";
     <script src="./assets/js/jquery.slicknav.min.js"></script>
 
     <!-- Video bg -->
-    <script src="./assets/js/jquery.vide.js"></script>
+    <!--<script src="./assets/js/jquery.vide.js"></script>-->
 
     <!-- Jquery Slick , Owl-Carousel Plugins -->
     <script src="./assets/js/owl.carousel.min.js"></script>
